@@ -5,7 +5,7 @@ const clienteUseCases = {
     
     return manageRequest(
       signal,
-      'getClientes',
+      'getClients',
       values,
       'query',
       'normal',
@@ -19,7 +19,7 @@ const clienteUseCases = {
     
     return manageRequest(
       signal,
-      'getClientes',
+      'getClients',
       values,
       'query',
       'normal',

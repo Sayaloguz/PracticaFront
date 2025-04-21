@@ -7,13 +7,19 @@ import { EXAMPLE_ERROR_MESSAGES, EXAMPLE_QUERIES } from "./queries/example-queri
 
 export const ERROR_MESSAGES = {
   ...EXAMPLE_ERROR_MESSAGES,
+  ...CLIENTE_ERROR_MESSAGES,
+  ...COMERCIO_ERROR_MESSAGES
 };
 
 export const QUERIES = {
   ...EXAMPLE_QUERIES,
+  ...CLIENTE_QUERIES,
+  ...COMERCIO_QUERIES
 };
 
 export const METHODS = {
   
   ...EXAMPLE_METHODS,
+  ...CLIENTE_METHODS,
+  ...COMERCIO_METHODS
 };

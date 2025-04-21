@@ -1,5 +1,11 @@
+import Table from "@/common/components/Table/Delivery";
+
 export default function ClientsPage(){
     return (
-        <div>Prueba clients</div>
+        <Table
+            columns={["ID", "Name", "Surname", "Email", "Phone"]}
+            apiEndpoint="/api/clients"
+            className="table-clients"
+        />
     );
 }

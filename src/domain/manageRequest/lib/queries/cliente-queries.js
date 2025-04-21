@@ -1,8 +1,6 @@
 export const CLIENTE_QUERIES = {
-    getClientes: () =>
-      `${process.env.NEXT_PUBLIC_API_URL}/clientes`,
-    
-    
+    getClients: () =>
+      `${process.env.NEXT_PUBLIC_API_URL}/getClients`,
   };
   
   

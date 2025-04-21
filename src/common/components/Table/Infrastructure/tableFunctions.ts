@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 
 // Tipo para los datos de la API (todos los valores son strings)
