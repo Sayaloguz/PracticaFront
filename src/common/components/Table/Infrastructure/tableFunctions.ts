@@ -10,7 +10,6 @@ type ApiResponse = Record<string, string>[];
  * @returns Objeto con: data, loading, error
  */
 export function useTableData(apiEndpoint: string) {
-  // Estado para los datos de la tabla
   const [data, setData] = useState<ApiResponse>([]);
   
   // Estado para el indicador de carga
@@ -23,8 +22,7 @@ export function useTableData(apiEndpoint: string) {
     const fetchData = async () => {
       try {
         // 1. Realizar la petición HTTP
-        const response = await fetch(apiEndpoint);
-        
+        const response = await fetch(apiEndpoint);        
         // 2. Verificar si la respuesta es exitosa
         if (!response.ok) {
           throw new Error(`Error en la petición: ${response.status}`);

@@ -1,58 +1,66 @@
+"use client";
 import { useTableData } from '../Infrastructure/tableFunctions';
 
-// Props del componente (solo lo necesario para la presentación)
-interface TableProps {
-  columns: string[];       // Nombres de las columnas a mostrar
-  apiEndpoint: string;     // Endpoint para obtener datos
-  className?: string;      // Clases CSS opcionales
-}
 
-/**
- * Componente Table - Solo maneja presentación
- */
-export default function Table({ columns, apiEndpoint, className = '' }: TableProps) {
-  // Consumimos la lógica de tableFunctions.ts
+type Column = {
+  key: string;
+  label: string;
+};
+
+type TableProps = {
+  apiEndpoint: string;
+  columns: Column[];
+};
+
+export default function Table({ apiEndpoint, columns }: TableProps) {
   const { data, loading, error } = useTableData(apiEndpoint);
 
-  // Estado de carga
-  if (loading) {
-    return (
-      <div className={`table-loading ${className}`}>
-        <span>Cargando datos...</span>
-      </div>
-    );
-  }
+  const formatCell = (key: string, value: string | null | undefined) => {
+    if (!value) return 'N/A';
 
-  // Estado de error
-  if (error) {
-    return (
-      <div className={`table-error ${className}`}>
-        <span>Error: {error}</span>
-      </div>
-    );
-  }
+    switch (key) {
+      case 'email':
+        return <a href={`mailto:${value}`} className="text-blue-600 underline">{value}</a>;
+      case 'phone':
+        return value.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+      case 'name':
+      case 'surname':
+        return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+      default:
+        return value;
+    }
+  };
 
-  // Renderizado principal de la tabla
+  if (loading) return <p className="text-gray-600">Cargando datos...</p>;
+  if (error) return <p className="text-red-600">Error: {error}</p>;
+
   return (
-    <table className={`table-component ${className}`}>
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th key={column}>{column.toUpperCase()}</th> // Ejemplo de formato
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, rowIndex) => (
-          <tr key={`row-${rowIndex}`}>
-            {columns.map((column) => (
-              <td key={`cell-${rowIndex}-${column}`}>
-                {row[column] || 'N/A'} {/* Valor por defecto */}
-              </td>
+    <div className="overflow-x-auto">
+      <table className="min-w-full border border-gray-300 text-sm">
+        <thead>
+          <tr className="bg-gray-100">
+            {columns.map((col) => (
+              <th
+                key={col.key}
+                className="px-4 py-2 border-b border-gray-300 text-left font-semibold text-gray-700"
+              >
+                {col.label}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((row, rowIndex) => (
+            <tr key={`row-${rowIndex}`} className="hover:bg-gray-50">
+              {columns.map((col) => (
+                <td key={`cell-${rowIndex}-${col.key}`} className="px-4 py-2 border-b">
+                  {formatCell(col.key, row[col.key])}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
