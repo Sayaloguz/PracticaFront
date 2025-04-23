@@ -1,6 +1,6 @@
 import manageRequest from '@/domain/manageRequest';
-
-const clientUseCases = {
+  // getClients, getClientById, getClientsByName, getClientByEmail, updateClient, deleteClient, createClient
+  const clientUseCases = {
   getClients: (signal, values, token) => {
     
     return manageRequest(
@@ -13,21 +13,81 @@ const clientUseCases = {
       token,
       undefined,
     );
+  },
 
-    /* 
-    
+  getClientById: (signal, values, token) => {
+    return manageRequest(
       signal,
-  requestString,
-  params = {},
-  mode = 'normal',
-  responseType = 'normal',
-  method = 'get',
-  token,
-  cache = 'no-store',
-  headers = {},
-  commonBody = true,
-    */
+      'getClientById',
+      values,
+      'normal',
+      'normal',
+      'get',
+      token,
+      undefined,
+    );
+  },
+  getClientsByName: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      'getClientsByName',
+      values,
+      'normal',
+      'normal',
+      'get',
+      token,
+      undefined,
+    );
+  },
+  getClientByEmail: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      'getClientByEmail',
+      values,
+      'normal',
+      'normal',
+      'get',
+      token,
+      undefined,
+    );
+  },
+  updateClient: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      'updateClient',
+      values,
+      'normal',
+      'normal',
+      'put',
+      token,
+      undefined,
+    );
+  },
+  deleteClient: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      'deleteClient',
+      values,
+      'normal',
+      'normal',
+      'delete',
+      token,
+      undefined,
+    );
+  },
+  createClient: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      'createClient',
+      values,
+      'normal',
+      'normal',
+      'post',
+      token,
+      undefined,
+    );
   }
+
 };
 
 export default clientUseCases;

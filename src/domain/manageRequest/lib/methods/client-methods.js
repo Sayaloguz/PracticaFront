@@ -1,6 +1,7 @@
 
 export const CLIENT_METHODS = {
-  
+  // getClients, getClientById, getClientsByName, updateClient, deleteClient, createClient
+
   getClients: (response) => {
     /* 
         switch (key) {
@@ -16,6 +17,23 @@ export const CLIENT_METHODS = {
     
     */
     return response
+    },
+  getClientById: (response) => {
+    return response
+  }
+  ,
+  getClientsByName: (response) => {
+    return response
   },
+  updateClient: (response) => {
+    return response
+  },
+  deleteClient: (response) => {
+    return response
+  },
+  createClient: (response) => {
+    return response
+  }
+
   
 };
