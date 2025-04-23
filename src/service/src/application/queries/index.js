@@ -1,11 +1,11 @@
 import exampleUseCases from './lib/example';
-import comercioUseCases from './lib/comercios';
-import clienteUseCases from './lib/clientes';
+import merchantUseCases from './lib/merchant';
+import clientUseCases from './lib/client';
 
 const queries = {
   ...exampleUseCases,
-  ...clienteUseCases,
-  ...comercioUseCases,
+  ...clientUseCases,
+  ...merchantUseCases
 };
 
 export default queries;

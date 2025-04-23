@@ -5,28 +5,28 @@
 import { EXAMPLE_METHODS } from "./methods/example-methods";
 import { EXAMPLE_ERROR_MESSAGES, EXAMPLE_QUERIES } from "./queries/example-queries";
 
-import { CLIENTE_METHODS } from "./methods/cliente-methods";
-import { CLIENTE_ERROR_MESSAGES, CLIENTE_QUERIES } from "./queries/cliente-queries";
+import { CLIENT_METHODS } from "./methods/client-methods";
+import { CLIENT_ERROR_MESSAGES, CLIENT_QUERIES } from "./queries/client-queries";
 
-import { COMERCIO_METHODS } from "./methods/comercio-methods";
-import { COMERCIO_ERROR_MESSAGES, COMERCIO_QUERIES } from "./queries/comercio-queries";
+import { MERCHANT_METHODS } from "./methods/merchant-methods";
+import { MERCHANT_ERROR_MESSAGES, MERCHANT_QUERIES } from "./queries/merchant-queries";
 
 
 export const ERROR_MESSAGES = {
   ...EXAMPLE_ERROR_MESSAGES,
-  ...CLIENTE_ERROR_MESSAGES,
-  ...COMERCIO_ERROR_MESSAGES
+  ...CLIENT_ERROR_MESSAGES,
+  ...MERCHANT_ERROR_MESSAGES
 };
 
 export const QUERIES = {
   ...EXAMPLE_QUERIES,
-  ...CLIENTE_QUERIES,
-  ...COMERCIO_QUERIES
+  ...CLIENT_QUERIES,
+  ...MERCHANT_QUERIES
 };
 
 export const METHODS = {
   
   ...EXAMPLE_METHODS,
-  ...CLIENTE_METHODS,
-  ...COMERCIO_METHODS
+  ...CLIENT_METHODS,
+  ...MERCHANT_METHODS
 };
