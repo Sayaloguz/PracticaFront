@@ -2,7 +2,6 @@
 import { FC, useEffect, useState } from "react";
 import Service from "../../../../service/src/index";
 import DeleteDialogModal from "../../Modals/DeleteDialogModal/Delivery/index";
-
 interface TableProps {
   useCase: string;
   endPointData?: Record<string, any>;
@@ -13,7 +12,7 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<any>(null);
+  const [targetToDelete, setTargetToDelete] = useState<any>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -66,8 +65,8 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
     return filteredRow;
   });
 
-  const handleDeleteClick = (user: any) => {
-    setUserToDelete(user);
+  const handleDeleteClick = (target: any) => {
+    setTargetToDelete(target);
     setShowModal(true);
   };
 
@@ -75,17 +74,18 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
     try {
       await Service.useCases("deleteClient", {
         signal: undefined,
-        endPointData: { id: userToDelete.id },
+        endPointData: { id: targetToDelete.id },
         token,
       });
 
-      setData((prev) => prev.filter((item) => item.id !== userToDelete.id));
+
+      setData((prev) => prev.filter((item) => item.id !== targetToDelete.id));
     } catch (error) {
-      console.log(userToDelete.id);
+      console.log(targetToDelete.id);
       console.error("Error al eliminar:", error);
     } finally {
       setShowModal(false);
-      setUserToDelete(null);
+      setTargetToDelete(null);
     }
   };
 
@@ -103,7 +103,7 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
                   {col}
                 </th>
               ))}
-              <th className="px-6 py-3">Acciones</th>
+              <th className="px-6 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -150,10 +150,11 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
 
       <DeleteDialogModal
         isOpen={showModal}
-        userName={userToDelete?.name || "este usuario"}
+        target="cliente"
+        name={targetToDelete?.name}
         onCancel={() => {
           setShowModal(false);
-          setUserToDelete(null);
+          setTargetToDelete(null);
         }}
         onConfirm={handleConfirmDelete}
       />

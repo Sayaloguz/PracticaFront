@@ -56,7 +56,7 @@ const manageRequest = async (
           .join('&');
         url += `?${dataForSend}`;
       }
-    } else if (mode === 'url') {
+    } else if (mode === 'url') { // http://localhost:3000/api/v1/clients/1234/5678
       url += Object.values(params).map((v) => '/' + encodeURIComponent(v));
     } else if (
       METHODS_WITH_BODY.includes(method.toLowerCase()) ||

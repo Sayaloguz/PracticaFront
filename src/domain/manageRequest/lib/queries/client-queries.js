@@ -4,11 +4,11 @@ export const CLIENT_QUERIES = {
     //getClients: () => `${process.env.CLIENT_API_URL}/getClients`,
     // 
     getClients:  () => `http://localhost:8081/api/getClients`,
-    getClientById: () => `http://localhost:8081/api/getById/{id}`,
-    getClientsByName: () => `http://localhost:8081/api/getByName/{name}`,
-    getClientByEmail: () => `http://localhost:8081/api/getByEmail/{email}`,
+    getClientById: ({id}) => `http://localhost:8081/api/getById/${id}`,
+    getClientsByName: ({name}) => `http://localhost:8081/api/getByName/${name}`,
+    getClientByEmail: ({email}) => `http://localhost:8081/api/getByEmail/${email}`,
     updateClient: () => `http://localhost:8081/api/update`,
-    deleteClient: () => `http://localhost:8081/api/delete`, // No existe aún
+    deleteClient: ({id}) => `http://localhost:8081/api/deleteClient/${id}`, 
     createClient: () => `http://localhost:8081/api/create`
   };
   
