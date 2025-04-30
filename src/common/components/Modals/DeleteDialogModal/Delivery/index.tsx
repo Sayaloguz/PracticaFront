@@ -3,14 +3,16 @@ import React from "react";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
-  userName?: string;
+  type: string;
+  name?: string; 
   onCancel: () => void;
   onConfirm: () => void;
 }
 
 const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
-  isOpen,
-  userName,
+  isOpen, 
+  type, // referencia a qué estamos borrando
+  name,
   onCancel,
   onConfirm,
 }) => {
@@ -20,10 +22,11 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-md w-[90%] max-w-md">
         <h2 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
-          ¿Estás seguro que quieres borrar este usuario?
+          {/* AQUÍ */}
+          ¿Estás seguro que quieres borrar este { type }?
         </h2>
         <p className="mb-4 text-gray-600 dark:text-gray-300">
-          {userName || "Usuario seleccionado"}
+          { name } será eliminado de forma permanente. Esta acción no se puede deshacer.
         </p>
         <div className="flex justify-end space-x-3">
           <button

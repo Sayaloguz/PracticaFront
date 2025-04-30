@@ -4,3 +4,4 @@ export const createPageUrl = (useCase: string) => {
   const pageUrl = `${baseUrl}/${useCase}`;
   return pageUrl;
 }*/
+

@@ -2,18 +2,21 @@
 import { FC, useEffect, useState } from "react";
 import Service from "../../../../service/src/index";
 import DeleteDialogModal from "../../Modals/DeleteDialogModal/Delivery/index";
+import { ToastContainer, toast, Slide } from 'react-toastify';
+//import { getActions } from "../Infrastructure/getActions";
 
 interface TableProps {
   useCase: string;
+  type: string;
   endPointData?: Record<string, any>;
   token?: string;
 }
 
-const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
+const Table: FC<TableProps> = ({ useCase, type, endPointData = {}, token = "" }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userToDelete, setUserToDelete] = useState<any>(null);
+  const [entityToDelete, setEntityToDelete] = useState<any>(null); // AQUÍ
 
   useEffect(() => {
     const controller = new AbortController();
@@ -58,6 +61,11 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
         return acc;
       }, {} as Record<string, any>);
 
+      /*
+    filteredRow.delete = `${getActions(type).delete}?id=${row.id}`;
+    filteredRow.edit = `${getActions(type).edit}?id=${row.id}`;
+    filteredRow.info = `${getActions(type).info}?id=${row.id}`; */
+    filteredRow.deleteUrl = `/clients/delete?id=${row.id}`; 
     filteredRow.editUrl = `/clients/edit?id=${row.id}`;
     filteredRow.deleteUrl = `/clients/delete?id=${row.id}`;
     filteredRow.infoUrl = `/clients/info?id=${row.id}`;
@@ -66,26 +74,57 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
     return filteredRow;
   });
 
-  const handleDeleteClick = (user: any) => {
-    setUserToDelete(user);
+  const handleDeleteClick = (entity: any) => {
+    setEntityToDelete(entity); // AQUÍ
     setShowModal(true);
+  };
+
+  const actionMap: Record<string, Record<string, string>> = {
+    client: {
+      delete: "deleteClient",
+      edit: "editClient",
+      update: "updateClient",
+    },
+    merchant: {
+      delete: "deleteMerchant",
+      edit: "editMerchant",
+      update: "updateMerchant",
+    },
   };
 
   const handleConfirmDelete = async () => {
     try {
-      await Service.useCases("deleteClient", {
+      const deleteAction = actionMap[type]?.delete; // Obtener la acción dinámica según el tipo
+  
+      if (!deleteAction) {
+        throw new Error(`No se encontró una acción de eliminación para el tipo: ${type}`);
+      }
+  
+      await Service.useCases(deleteAction, {
         signal: undefined,
-        endPointData: { id: userToDelete.id },
+        endPointData: { id: entityToDelete.id },
         token,
       });
-
-      setData((prev) => prev.filter((item) => item.id !== userToDelete.id));
+  
+      setData((prev) => prev.filter((item) => item.id !== entityToDelete.id));
     } catch (error) {
-      console.log(userToDelete.id);
+      console.log(entityToDelete.id);
       console.error("Error al eliminar:", error);
     } finally {
       setShowModal(false);
-      setUserToDelete(null);
+      setEntityToDelete(null);
+  
+      toast.success("Success on delete", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Slide,
+      });
     }
   };
 
@@ -149,13 +188,28 @@ const Table: FC<TableProps> = ({ useCase, endPointData = {}, token = "" }) => {
       </div>
 
       <DeleteDialogModal
-        isOpen={showModal}
-        userName={userToDelete?.name || "este usuario"}
+        isOpen={showModal} 
+        type={ type } 
+        name={entityToDelete?.name}
         onCancel={() => {
           setShowModal(false);
-          setUserToDelete(null);
+          setEntityToDelete(null);
         }}
         onConfirm={handleConfirmDelete}
+      />
+
+      <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      transition={Slide}
       />
     </div>
   );

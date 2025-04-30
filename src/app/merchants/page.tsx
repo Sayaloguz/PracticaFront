@@ -4,6 +4,7 @@ export default function MerchantsPage(){
         <section>
         <h1>Tabla de merchants</h1>
         <Table
+            type="merchant"
             useCase="getMerchants"
         />
        </section>
