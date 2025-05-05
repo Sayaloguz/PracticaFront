@@ -1,11 +1,33 @@
+import Link from "next/link";
+import Icon from "../../Icon/Delivery";
+
 export default function Sidebar() {
     return (
       <aside className="sidebar">
         <h2><a href="/">Home</a></h2>
         <ul>
-          <li><a href="/clients">Clients</a></li>
-          <li><a href="/merchants">Merchants</a></li>
-          <li><a href="/about">About</a></li>
+
+          <li>
+            <Link href="/clients">
+            {/* Esto se muede desmigar más */}
+              <Icon id="users"/> 
+              Clients
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/merchants">
+              <Icon id="store"/>
+              Merchants
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/about">
+              <Icon id="info"/>
+              About
+            </Link>
+          </li>
         </ul>
       </aside>
     );

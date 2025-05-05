@@ -3,7 +3,11 @@ import { FC } from "react";
 import DeleteIcon from "../DeleteIcon";
 import EditIcon from "../EditIcon";
 import InfoIcon from "../InfoIcon";
-
+import CloseIcon from "../CloseIcon";
+import UsersIcon from "../UsersIcon";
+import StoreIcon from "../StoreIcon";
+import AddIcon from "../AddIcon";
+import UserPlusIcon from "../UserPlusIcon";
 
 
 interface IconProps{
@@ -13,7 +17,12 @@ interface IconProps{
 const icons = {
     edit: EditIcon,
     delete: DeleteIcon,
-    info: InfoIcon
+    info: InfoIcon,
+    close: CloseIcon,
+    users: UsersIcon,
+    store: StoreIcon,
+    add: AddIcon,
+    addUser: UserPlusIcon
 }
 
 const Icon: FC<IconProps> = ({id}) => {
