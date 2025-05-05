@@ -9,7 +9,7 @@ export default function Sidebar() {
 
           <li>
             <Link href="/clients">
-            {/* Esto se muede desmigar más */}
+            {/* Esto se puede desmigar más */}
               <Icon id="users"/> 
               Clients
             </Link>
