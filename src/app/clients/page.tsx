@@ -1,4 +1,4 @@
-import ClientsTable from "@/common/components/ClientsTable/Delivery";
+import ClientsTable from "@/common/components/Tables/ClientsTable/Delivery";
 import Service from "@/service/src";
 
 export default async function ClientsPage() {
@@ -8,7 +8,9 @@ export default async function ClientsPage() {
   return (
     <section>
       <h1 className="text-xl font-semibold mb-4">Tabla de clientes</h1>
-      <ClientsTable initialData={data} />
+      <ClientsTable 
+      
+      initialData={data} />
     </section>
   );
 }

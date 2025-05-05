@@ -1,4 +1,4 @@
-import MerchantsTable from "@/common/components/MerchantsTable/Delivery";
+import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import Service from "@/service/src";
 
 export default async function MerchantsPage() {

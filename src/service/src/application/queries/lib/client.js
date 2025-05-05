@@ -52,6 +52,7 @@ import manageRequest from '@/domain/manageRequest';
     );
   },
   updateClient: (signal, values, token) => {
+    console.log("Datos recibidos en updateClient:", values); 
     return manageRequest(
       signal,
       'updateClient',
@@ -61,6 +62,9 @@ import manageRequest from '@/domain/manageRequest';
       'put',
       token,
       undefined,
+      {
+        'Content-Type': 'application/json' 
+      }
     );
   },
   deleteClient: (signal, values, token) => {
@@ -85,6 +89,9 @@ import manageRequest from '@/domain/manageRequest';
       'post',
       token,
       undefined,
+      {
+        'Content-Type': 'application/json' 
+      },
     );
   }
 
