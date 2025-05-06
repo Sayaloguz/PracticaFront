@@ -61,6 +61,9 @@ const merchantUseCases = {
       'put',
       token,
       undefined,
+      {
+        'Content-Type': 'application/json' 
+      },
     );
   },
   createMerchant: (signal, values, token) => {
@@ -73,6 +76,9 @@ const merchantUseCases = {
       'post',
       token,
       undefined,
+      {
+        'Content-Type': 'application/json' 
+      },
     );
   }
 

@@ -8,17 +8,17 @@ import IconToast from "../../../Toast/IconToast/Delivery";
 import UpdateModal from "../../../Modals/UpdateModal/Delivery";
 
 interface Merchant {
-    id: string;
-    name: string;
-    address: string;
-    merchantType: string;
-    gindexClient: string;
-  }
+  id: string;
+  name: string;
+  address: string;
+  merchantType: string;
+  gindexClient: string;
+}
 
 interface MerchantRowProps {
   merchant: Merchant;
   isEven: boolean;
-  onDeleted: (id: string) => void; // Para actualizar la lista
+  onDeleted: (id: string) => void;
 }
 
 const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
@@ -33,37 +33,23 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
   const onClickUpdate = () => {
     setShowUpdateModal(true);
   };
+
   return (
     <>
-      <tr
-        className={`${
-          isEven ? "bg-white" : "bg-gray-50"
-        } border-b hover:bg-gray-100`}
-      >
+      <tr className={`${isEven ? "bg-white" : "bg-gray-50"} border-b hover:bg-gray-100`}>
         <td className="px-6 py-4">{merchant.name}</td>
         <td className="px-6 py-4">{merchant.address}</td>
         <td className="px-6 py-4">{merchant.merchantType}</td>
         <td className="px-6 py-4">{merchant.gindexClient}</td>
         <td className="px-6 py-4 flex gap-3">
-          <button
-            onClick={onClickDelete}
-            className="text-red-600 hover:underline"
-          >
+          <button onClick={onClickDelete} className="text-red-600 hover:underline">
             <Icon id="delete" />
           </button>
-
-          <button
-            onClick={onClickUpdate}
-            className="text-blue-600 hover:underline"
-          >
-            <Icon id="edit"/>
+          <button onClick={onClickUpdate} className="text-blue-600 hover:underline">
+            <Icon id="edit" />
           </button>
-
-          <button
-            onClick={onClickDelete}
-            className="text-green-600 hover:underline"
-          >
-            <Icon id="info"/>
+          <button onClick={onClickDelete} className="text-green-600 hover:underline">
+            <Icon id="info" />
           </button>
         </td>
       </tr>
@@ -72,10 +58,12 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
         <DeleteModal
           title="Eliminar merchant"
           message={`¿Estás seguro de que deseas eliminar el merchant ${merchant.name}?`}
-          onConfirm={() => {
-            handleDelete({ merchantId: merchant.id, onDeleted });
-            setShowDeleteModal(false);
-            setShowToast(true);
+          onConfirm={async () => {
+            const result = await handleDelete({ merchantId: merchant.id, onDeleted });
+            if (result.success) {
+              setShowDeleteModal(false);
+              setShowToast(true);
+            }
           }}
           onCancel={() => setShowDeleteModal(false)}
         />
@@ -94,22 +82,17 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
         />
       )}
 
-
-      {/* Toast para mostrar el mensaje de éxito */}
-
       {showToast && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
           <IconToast 
             icon="delete"
-            //message={`Merchant ${merchant.name} ${merchant.surname} eliminado con éxito.`}
             message="Acción realizada con éxito."
+            onClose={() => setShowToast(false)}
           />
         </div>
       )}
     </>
-
   );
 };
-
 
 export default MerchantRow;

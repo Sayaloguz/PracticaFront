@@ -6,35 +6,34 @@ import InputFloatingLabel from "../../InputFloatingLabel";
 interface MerchantFormProps {
   id?: string;
   action: string;
-  onSuccess?: (data: any) => void;
   onCancel?: () => void;
 }
 
-const MerchantForm: FC<MerchantFormProps> = ({ action, id, onSuccess, onCancel}: MerchantFormProps) => {
+const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
 
-    const data: any = {
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const payload = {
+      endPointData: {  
       name: formData.get("name") as string,
       address: formData.get("address") as string,
       merchantType: formData.get("merchantType") as string,
       gindexClient: formData.get("gindexClient") as string,
-    };
-    
-    // Solo si el id está definido, lo añadimos a los datos
-    if (id) {
-      data.id = id;
     }
+  };
 
+  if (id) {
+    payload.endPointData.id = id;
+  }
 
     try {
-      const response = await Service.useCases(action, data);
-      console.log("Datos enviados:", data);
+      const response = await Service.useCases(action, payload);
+      console.log("Datos enviados:", payload);
       console.log("Respuesta de la API:", response);
+      // El modal se cerrará externamente
     } catch (error) {
-      console.log("Datos enviados:", data);
+      console.log(payload);
       console.error("Error al llamar a la API:", error);
     }
   };
@@ -42,36 +41,17 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onSuccess, onCancel}:
   return (
     <div>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-        <InputFloatingLabel
-          id="name"
-          label="Nombre"
-          required={true}
-        />
+        <InputFloatingLabel id="name" label="Nombre" required={true} />
+        <InputFloatingLabel id="address" label="Dirección" required={true} />
+        <InputFloatingLabel id="merchantType" label="Tipo de Merchant" required={true} />
+        <InputFloatingLabel id="gindexClient" label="ID del cliente" required={true} />
 
-        <InputFloatingLabel
-          id="address"
-          label="Dirección"
-          required={true}
-        />
-
-        {/* Se puede mejorar con un select */}
-        <InputFloatingLabel
-          id="merchantType"
-          label="Tipo de Merchant"
-          required={true}
-        />
-        
-        <InputFloatingLabel
-          id="gindexClient"
-          label="ID del cliente"
-          required={true}
-        />
         {action === "updateMerchant" && (
           <button
-          type="button"
-          onClick={onCancel}
-          className="py-2 px-4 border rounded-md text-gray-500 hover:bg-gray-100"
-        >
+            type="button"
+            onClick={onCancel}
+            className="py-2 px-4 border rounded-md text-gray-500 hover:bg-gray-100 mr-2"
+          >
             Cancelar
           </button>
         )}
