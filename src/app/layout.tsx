@@ -28,9 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased layout`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased layout`}>
         <Sidebar />
         <div className="content">
           <main className="main">
@@ -42,21 +40,3 @@ export default function RootLayout({
     </html>
   );
 }
-/*
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-        <Sidebar/>
-        <Footer/>
-      </body>
-    </html>
-  );
-  */

@@ -15,11 +15,17 @@ interface MerchantsTableProps {
   initialData: Merchant[];
 }
 
-const MerchantsTable: FC<MerchantsTableProps> = ({ initialData }: MerchantsTableProps) => {
+const MerchantsTable: FC<MerchantsTableProps> = ({ initialData }) => {
   const [merchants, setMerchants] = useState(initialData);
 
   const handleDeleted = (id: string) => {
     setMerchants((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  const handleUpdated = (updated: Merchant) => {
+    setMerchants((prev) =>
+      prev.map((m) => (m.id === updated.id ? updated : m))
+    );
   };
 
   if (merchants.length === 0) return <p>No hay resultados</p>;
@@ -43,6 +49,7 @@ const MerchantsTable: FC<MerchantsTableProps> = ({ initialData }: MerchantsTable
               merchant={merchant}
               isEven={index % 2 === 0}
               onDeleted={handleDeleted}
+              onUpdated={handleUpdated}
             />
           ))}
         </tbody>

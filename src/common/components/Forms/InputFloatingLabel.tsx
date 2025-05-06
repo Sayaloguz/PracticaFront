@@ -1,19 +1,16 @@
-import React from "react";
-import { FC } from "react";
+import React, { FC, InputHTMLAttributes } from "react";
 
-interface InputFloatingLabelProps {
+interface InputFloatingLabelProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  type?: string;
   label: string;
-  required?: boolean;
 }
-
 
 const InputFloatingLabel: FC<InputFloatingLabelProps> = ({
   id,
   type = "text",
   label,
   required = true,
+  ...rest
 }) => {
   return (
     <div className="relative z-0 w-full mb-5 group">
@@ -21,9 +18,10 @@ const InputFloatingLabel: FC<InputFloatingLabelProps> = ({
         type={type}
         name={id}
         id={id}
-        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
-        placeholder=" "
         required={required}
+        placeholder=" "
+        className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
+        {...rest} // 👈 Aquí pasan defaultValue y demás
       />
       <label
         htmlFor={id}

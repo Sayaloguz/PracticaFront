@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
@@ -19,20 +19,13 @@ interface MerchantRowProps {
   merchant: Merchant;
   isEven: boolean;
   onDeleted: (id: string) => void;
+  onUpdated: (merchant: Merchant) => void;
 }
 
-const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
+const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
-  const onClickDelete = () => {
-    setShowDeleteModal(true);
-  };
-
-  const onClickUpdate = () => {
-    setShowUpdateModal(true);
-  };
 
   return (
     <>
@@ -42,13 +35,13 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
         <td className="px-6 py-4">{merchant.merchantType}</td>
         <td className="px-6 py-4">{merchant.gindexClient}</td>
         <td className="px-6 py-4 flex gap-3">
-          <button onClick={onClickDelete} className="text-red-600 hover:underline">
+          <button onClick={() => setShowDeleteModal(true)} className="text-red-600 hover:underline">
             <Icon id="delete" />
           </button>
-          <button onClick={onClickUpdate} className="text-blue-600 hover:underline">
+          <button onClick={() => setShowUpdateModal(true)} className="text-blue-600 hover:underline">
             <Icon id="edit" />
           </button>
-          <button onClick={onClickDelete} className="text-green-600 hover:underline">
+          <button onClick={() => setShowDeleteModal(true)} className="text-green-600 hover:underline">
             <Icon id="info" />
           </button>
         </td>
@@ -73,7 +66,9 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
         <UpdateModal
           title="Actualizar merchant"
           id={merchant.id}
-          onSubmit={() => {
+          initialData={merchant}
+          onSubmit={(updated) => {
+            onUpdated(updated);
             setShowUpdateModal(false);
             setShowToast(true);
           }}
@@ -84,7 +79,7 @@ const MerchantRow = ({ merchant, isEven, onDeleted }: MerchantRowProps) => {
 
       {showToast && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-          <IconToast 
+          <IconToast
             icon="delete"
             message="Acción realizada con éxito."
             onClose={() => setShowToast(false)}
