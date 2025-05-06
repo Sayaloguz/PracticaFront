@@ -8,7 +8,6 @@ import Icon from "../../../Icon/Delivery";
 import { handleDelete } from "../Infrastructure/handleActions";
 import DeleteModal from "../../../Modals/DeleteModal/Delivery/index";
 import IconToast from "../../../Toast/IconToast/Delivery";
-import UpdateModal from "../../../Modals/UpdateModal/Delivery";
 
 interface Client {
   id: string;
@@ -23,22 +22,16 @@ interface Props {
   client: Client;
   isEven: boolean;
   onDeleted: (id: string) => void; // Para actualizar la lista
-  onUpdate: (id: string) => void; // Para actualizar la lista
 }
 
 const ClientRow = ({ client, isEven, onDeleted }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   
   const [showToast, setShowToast] = useState(false);
 
   const onClickDelete = () => {
     setShowDeleteModal(true);
-  };
-
-  const onClickUpdate = () => {
-    setShowUpdateModal(true);
   };
 
   return (
@@ -62,7 +55,7 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
           </button>
 
           <button
-            onClick={onClickUpdate}
+            onClick={onClickDelete}
             className="text-blue-600 hover:underline"
           >
             <Icon id="edit"/>
@@ -90,25 +83,11 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
         />
       )}
 
-      {showUpdateModal && (
-        <UpdateModal
-          title="Actualizar cliente"
-          id={client.id}
-          onSubmit={() => {
-            setShowUpdateModal(false);
-            setShowToast(true);
-          }}
-          onConfirm={() => setShowUpdateModal(false)}
-          onCancel={() => setShowUpdateModal(false)}
-        />
-      )}
-
       {showToast && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
           <IconToast 
             icon="delete"
-            //message={`Cliente ${client.name} ${client.surname} eliminado con éxito.`
-            message="Acción realizada con éxito."
+            message={`Cliente ${client.name} ${client.surname} eliminado con éxito.`}
           />
         </div>
       )}

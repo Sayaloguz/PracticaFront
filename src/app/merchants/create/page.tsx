@@ -1,15 +1,14 @@
-import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
+import MerchantForm from "@/common/components/Forms/MerchantForm/Delivery";
 
-export default function CreateClientPage() {
+export default function CreateMerchantPage() {
   return (
     <section>
       <h1 className="mt-10 ml-10 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-        Crear cliente
+        Crear merchant
       </h1>
 
       <div className="w-1/2 mt-10 mb-10 mx-auto">
-        <ClientForm action="createClient"
-        
+        <MerchantForm action="createMerchant"
         />
       </div>
     </section>

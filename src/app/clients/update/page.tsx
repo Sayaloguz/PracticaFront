@@ -4,8 +4,7 @@ export default function UpdateClientPage() {
         <section>
             <h1>Actualizar cliente</h1>
             <ClientForm
-                pk="client#b77580ae-ce37-4708-b8b6-09260e2fc384"
-                sk="8fabf5bb-6987-47c1-8fe5-c61d81732337"
+                id="737e36ae-143e-409f-bd3d-ce5854ea5dff"
                 action="updateClient"
             />
         </section>
