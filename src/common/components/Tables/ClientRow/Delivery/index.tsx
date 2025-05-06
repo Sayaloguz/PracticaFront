@@ -94,6 +94,7 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
         <UpdateModal
           title="Actualizar cliente"
           id={client.id}
+          initialData={client}
           onSubmit={() => {
             setShowUpdateModal(false);
             setShowToast(true);

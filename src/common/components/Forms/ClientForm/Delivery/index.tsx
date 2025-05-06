@@ -8,9 +8,16 @@ interface ClientFormProps {
   action: string;
   onSuccess?: (data: any) => void;
   onCancel?: () => void;
+  initialData?: {
+    cifNifNie: string;
+    name: string;
+    surname: string;
+    phone: string;
+    email: string;
+  };
 }
 
-const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel }: ClientFormProps) => {
+const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, initialData }: ClientFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -44,24 +51,28 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel }: Cl
           id="name" 
           label="Nombre" 
           required={true}
+          defaultValue={initialData?.name}
         />
 
         <InputFloatingLabel 
           id="surname" 
           label="Apellido" 
           required={true}
+          defaultValue={initialData?.surname}
         />
 
         <InputFloatingLabel
           id="cifNifNie"
           label="Documento de identidad (CIF/NIF/NIE)"
           required={true}
+          defaultValue={initialData?.cifNifNie}
         />
 
         <InputFloatingLabel
           id="phone"
           label="Teléfono"
           required={true}
+          defaultValue={initialData?.phone}
         />
 
         <InputFloatingLabel
@@ -69,6 +80,7 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel }: Cl
           label="Email"
           type="email"
           required={true}
+          defaultValue={initialData?.email}
         />
 
         {action === "updateClient" && (

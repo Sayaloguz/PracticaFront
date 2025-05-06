@@ -10,9 +10,13 @@ interface UpdateModalProps {
   onCancel: () => void;
   initialData?: {
     name: string;
-    address: string;
-    merchantType: string;
-    gindexClient: string;
+    address?: string;
+    merchantType?: string;
+    gindexClient?: string;
+    cifNifNie?: string;
+    surname?: string;
+    phone?: string;
+    email?: string;
   };
 }
 
@@ -36,6 +40,7 @@ const UpdateModal: FC<UpdateModalProps> = ({
               action="updateClient"
               onCancel={onCancel}
               onSuccess={onSubmit}
+              initialData={initialData}
             />
           )}
 
