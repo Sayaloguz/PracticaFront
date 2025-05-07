@@ -52,7 +52,6 @@ import manageRequest from '@/domain/manageRequest';
     );
   },
   updateClient: (signal, values, token) => {
-    console.log("Datos recibidos en updateClient:", values); 
     return manageRequest(
       signal,
       'updateClient',

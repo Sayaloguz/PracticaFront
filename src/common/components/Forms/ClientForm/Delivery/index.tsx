@@ -38,7 +38,15 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
   
     try {
       const response = await Service.useCases(action, payload);
-      console.log("Respuesta de la API:", response);
+      toast.success("Cliente eliminado correctamente", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
     } catch (error) {
       console.error("Error al llamar a la API:", error);
     }

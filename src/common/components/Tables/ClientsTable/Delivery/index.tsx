@@ -31,6 +31,7 @@ const ClientsTable: FC<ClientsTableProps> = ({ initialData }: ClientsTableProps)
 
     const handleUpdated = () => {
     console.log("Client updated");
+    
     }
 
   if (clients.length === 0) return <p>No hay resultados</p>;
@@ -55,7 +56,7 @@ const ClientsTable: FC<ClientsTableProps> = ({ initialData }: ClientsTableProps)
               client={client}
               isEven={index % 2 === 0}
               onDeleted={handleDeleted}
-              onUpdate={handleUpdated} // <- esta función tienes que definirla
+              onUpdate={handleUpdated} 
             />
           ))}
         </tbody>

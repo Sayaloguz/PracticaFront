@@ -1,6 +1,8 @@
 import MerchantForm from "@/common/components/Forms/MerchantForm/Delivery";
 import MainTitle from "@/common/components/Titles/MainTitle";
 
+
+
 export default function CreateMerchantPage() {
   return (
     <section>

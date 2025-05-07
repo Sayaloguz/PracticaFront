@@ -1,5 +1,6 @@
 
 import Service from "@/service/src";
+import { ToastContainer, toast } from "react-toastify";
 
 export async function handleDelete({ 
     clientId, 
@@ -14,6 +15,9 @@ export async function handleDelete({
         });
         onDeleted(clientId);
         // Aquí podríamos llamas a un success toast o algo así
+
+
+
         return { 
             success: true,
         };
