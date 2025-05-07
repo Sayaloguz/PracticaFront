@@ -30,7 +30,7 @@ const merchantUseCases = {
   getMerchantsByName: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getMerchantByName',
+      'getMerchantsByName',
       values,
       'normal',
       'normal',

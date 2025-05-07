@@ -23,7 +23,6 @@ interface UpdateModalProps {
 const UpdateModal: FC<UpdateModalProps> = ({
   title,
   id,
-  onConfirm,
   onCancel,
   onSubmit,
   initialData,
