@@ -3,7 +3,7 @@ import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
 import Service from "@/service/src";
 import { MerchantsTableSkeleton } from "@/common/components/Skelletons/MerchantsTableSkelleton";
-
+import MainTitle from "@/common/components/Titles/MainTitle";
 
 async function MerchantResults({ searchParams }: { searchParams: { query?: string } }) {
   const query = searchParams?.query || "";
@@ -23,7 +23,8 @@ export default async function MerchantsPage({searchParams}: {searchParams?: {que
 
   return (
     <section>
-      <h1 className="text-xl font-semibold mb-4">Tabla de merchants</h1>
+      <MainTitle title="Merchants" />
+
       <Search placeholder="Buscar merchant por nombre" />
 
       <Suspense key={searchParams?.query} fallback={<MerchantsTableSkeleton />}>

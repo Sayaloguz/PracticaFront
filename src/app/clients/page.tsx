@@ -4,6 +4,7 @@ import ClientsTable from "@/common/components/Tables/ClientsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
 import Service from "@/service/src";
 import { ClientsTableSkeleton } from "@/common/components/Skelletons/ClientsTableSkelleton";
+import MainTitle from '@/common/components/Titles/MainTitle';
 
 // Componente que se volverá a ejecutar cuando cambien los params
 async function ClientResults({ searchParams }: { searchParams: { query?: string } }) {
@@ -23,7 +24,8 @@ async function ClientResults({ searchParams }: { searchParams: { query?: string 
 export default function ClientsPage({searchParams}: { searchParams?: { query?: string;}}) {
   return (
     <section>
-      <h1 className="text-xl font-semibold mb-4">Tabla de clientes</h1>
+      <MainTitle title="Clientes" />
+
       <Search placeholder="Buscar cliente" />
 
       <Suspense key={searchParams?.query} fallback={<ClientsTableSkeleton />}>

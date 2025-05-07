@@ -1,11 +1,10 @@
 import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
+import MainTitle from "@/common/components/Titles/MainTitle";
 
 export default function CreateClientPage() {
   return (
     <section>
-      <h1 className="mt-10 ml-10 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-        Crear cliente
-      </h1>
+      <MainTitle title="Crear cliente" />
 
       <div className="w-1/2 mt-10 mb-10 mx-auto">
         <ClientForm action="createClient"
