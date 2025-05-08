@@ -1,14 +1,12 @@
 'use client';
-/*
-import { deleteClient } from "../../../../app/actions/deleteClient";
-import { useTransition } from "react";*/
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
-import { handleDelete } from "../Infrastructure/handleActions";
-import DeleteModal from "../../../Modals/DeleteModal/Delivery/index";
-import UpdateModal from "../../../Modals/UpdateModal/Delivery";
+import DeleteModalAntd from "../../../Modals/DeleteModalAntd/Delivery";
+import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
+import Service from "@/service/src";
+
 interface Client {
   id: string;
   cifNifNie: string;
@@ -21,15 +19,36 @@ interface Client {
 interface Props {
   client: Client;
   isEven: boolean;
-  onDeleted: (id: string) => void; // Para actualizar la lista
-  onUpdate: (id: string) => void; // Para actualizar la lista
+  onDeleted: (id: string) => void; 
+  onUpdate: (updatedClient: Client) => void; 
 }
 
-const ClientRow = ({ client, isEven, onDeleted }: Props) => {
+async function handleDelete({
+  clientId,
+  onDeleted,
+}: {
+  clientId: string;
+  onDeleted: (id: string) => void;
+}) {
+  try {
+    await Service.useCases("deleteClient", {
+      endPointData: { id: clientId },
+    });
+    onDeleted(clientId);
+
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Error al eliminar cliente:", error);
+    return { success: false, message: String(error) };
+  }
+}
+
+const ClientRow = ({ client, isEven, onDeleted, onUpdate }: Props) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  
   const onClickDelete = () => {
     setShowDeleteModal(true);
   };
@@ -41,6 +60,7 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
   return (
     <>
       <tr
+        key={client.id}
         className={`${
           isEven ? "bg-white" : "bg-gray-50"
         } border-b hover:bg-gray-100`}
@@ -62,58 +82,62 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
             onClick={onClickUpdate}
             className="text-blue-600 hover:underline"
           >
-            <Icon id="edit"/>
-          </button>
-
-          <button
-            onClick={onClickDelete}
-            className="text-green-600 hover:underline"
-          >
-            <Icon id="info"/>
+            <Icon id="edit" />
           </button>
         </td>
       </tr>
 
       {showDeleteModal && (
-        <DeleteModal
+        <DeleteModalAntd
           title="Eliminar cliente"
           message={`¿Estás seguro de que deseas eliminar a ${client.name} ${client.surname}?`}
-          onConfirm={() => {
-            handleDelete({ clientId: client.id, onDeleted });
+          open={showDeleteModal}
+          onConfirm={async () => {
+            const result = await handleDelete({ clientId: client.id, onDeleted });
             setShowDeleteModal(false);
 
-            toast.success("Cliente eliminado con éxito", {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+            if (result.success) {
+              toast.success("Cliente eliminado con éxito", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            } else {
+              toast.error(`Error: ${result.message}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
           }}
-
           onCancel={() => setShowDeleteModal(false)}
         />
       )}
 
       {showUpdateModal && (
-        <UpdateModal
+        <UpdateModalAntd
           title="Actualizar cliente"
-          id={client.id}
+          open={showUpdateModal}
           initialData={client}
-          onSubmit={() => {
+          onSubmit={(updatedClient) => {
+            onUpdate(updatedClient); 
             setShowUpdateModal(false);
           }}
-          onConfirm={() => setShowUpdateModal(false)}
           onCancel={() => setShowUpdateModal(false)}
         />
       )}
     </>
-
   );
 };
-
 
 export default ClientRow;

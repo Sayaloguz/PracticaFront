@@ -5,11 +5,11 @@ import InputFloatingLabel from "../../InputFloatingLabel";
 import { toast } from "react-toastify";
 
 interface MerchantFormProps {
-  id?: string;
   action: string;
   onCancel?: () => void;
   onSuccess?: (merchant: any) => void;
   initialData?: {
+    id?: string;
     name: string;
     address: string;
     merchantType: string;
@@ -17,7 +17,7 @@ interface MerchantFormProps {
   };
 }
 
-const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, initialData }) => {
+const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, initialData }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -31,8 +31,8 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
       },
     };
 
-    if (id) {
-      payload.endPointData.id = id;
+    if (initialData?.id) {
+      payload.endPointData.id = initialData?.id;
     }
 
     try {
@@ -74,7 +74,7 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="w-full space-y-4">
       <InputFloatingLabel
         id="name"
         label="Nombre"
@@ -96,7 +96,7 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
       />
 
 {/* Cambiar esto para que obtenga los valores de forma localizada y hacer la normalización de datos donde corresponde, además de tomar bien el valor por defecto*/}
-<select
+    <select
       id="merchantType"
       name="merchantType"
       className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 mb-4"

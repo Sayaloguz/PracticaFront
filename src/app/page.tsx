@@ -10,6 +10,7 @@ export default function Home() {
         alt="Personas en una oficina trabajando con ordenadores"
       />
         <MainTitle title="Bienvenido a la página principal" />
+        <p>Pufff, esto está super vacío...</p>
       </div>
 
     </div>

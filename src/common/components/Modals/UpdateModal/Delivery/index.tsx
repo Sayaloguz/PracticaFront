@@ -1,14 +1,14 @@
 import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
 import MerchantForm from "@/common/components/Forms/MerchantForm/Delivery";
+import SecondaryTitle from "@/common/components/Titles/SecondaryTitle";
 import { FC } from "react";
 
 interface UpdateModalProps {
   title: string;
-  id: string;
   onSubmit: (updated: any) => void;
-  onConfirm: () => void;
   onCancel: () => void;
-  initialData?: {
+  initialData: {
+    id: string;
     name: string;
     address?: string;
     merchantType?: string;
@@ -22,7 +22,6 @@ interface UpdateModalProps {
 
 const UpdateModal: FC<UpdateModalProps> = ({
   title,
-  id,
   onCancel,
   onSubmit,
   initialData,
@@ -31,21 +30,21 @@ const UpdateModal: FC<UpdateModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
       <div className="relative p-4 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white">{title}</h3>
+          <SecondaryTitle title={title} />
 
           {title === "Actualizar cliente" && (
             <ClientForm
-              id={id}
               action="updateClient"
               onCancel={onCancel}
-              onSuccess={onSubmit}
+              onSuccess={(updatedClient) => {
+                onSubmit(updatedClient); // Pasa los datos actualizados al padre
+              }}
               initialData={initialData}
             />
           )}
 
           {title === "Actualizar merchant" && (
             <MerchantForm
-              id={id}
               action="updateMerchant"
               onCancel={onCancel}
               onSuccess={onSubmit}

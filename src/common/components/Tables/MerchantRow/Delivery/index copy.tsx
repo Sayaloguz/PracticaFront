@@ -1,9 +1,10 @@
+// Versión previa al uso de antd
 "use client";
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
-import DeleteModalAntd from "../../../Modals/DeleteModalAntd/Delivery";
-import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
+import DeleteModal from "../../../Modals/DeleteModal/Delivery/index";
+import UpdateModal from "../../../Modals/UpdateModal/Delivery";
 import { toast } from "react-toastify";
 import Service from "@/service/src";
 
@@ -22,6 +23,7 @@ interface MerchantRowProps {
   onUpdated: (merchant: Merchant) => void;
 }
 
+// Definir handleDelete localmente
 async function handleDelete({
   merchantId,
   onDeleted,
@@ -62,19 +64,21 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
           <button onClick={() => setShowUpdateModal(true)} className="text-blue-600 hover:underline">
             <Icon id="edit" />
           </button>
+          <button onClick={() => setShowDeleteModal(true)} className="text-green-600 hover:underline">
+            <Icon id="info" />
+          </button>
         </td>
       </tr>
 
       {showDeleteModal && (
-        <DeleteModalAntd
+        <DeleteModal
           title="Eliminar merchant"
           message={`¿Estás seguro de que deseas eliminar el merchant ${merchant.name}?`}
-          open={showDeleteModal}
           onConfirm={async () => {
             const result = await handleDelete({ merchantId: merchant.id, onDeleted });
-            setShowDeleteModal(false);
-
             if (result.success) {
+              setShowDeleteModal(false);
+
               toast.success("Merchant eliminado con éxito", {
                 position: "top-right",
                 autoClose: 5000,
@@ -103,12 +107,11 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
       )}
 
       {showUpdateModal && (
-        <UpdateModalAntd
+        <UpdateModal
           title="Actualizar merchant"
-          open={showUpdateModal}
           initialData={merchant}
           onSubmit={(updated) => {
-            onUpdated(updated);
+            onUpdated(updated); // Actualiza el merchant en el componente padre
             setShowUpdateModal(false);
           }}
           onCancel={() => setShowUpdateModal(false)}

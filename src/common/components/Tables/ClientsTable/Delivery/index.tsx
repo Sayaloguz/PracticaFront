@@ -23,16 +23,11 @@ const ClientsTable: FC<ClientsTableProps> = ({ initialData }: ClientsTableProps)
     setClients((prev) => prev.filter((c) => c.id !== id));
   };
 
-  /*
   const handleUpdated = (updatedClient: Client) => {
     setClients((prev) =>  
       prev.map((client) => (client.id === updatedClient.id ? updatedClient : client))
-    ); */
-
-    const handleUpdated = () => {
-    console.log("Client updated");
-    
-    }
+    );
+  }
 
   if (clients.length === 0) return <p>No hay resultados</p>;
 

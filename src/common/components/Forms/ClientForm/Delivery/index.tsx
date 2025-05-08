@@ -5,11 +5,11 @@ import InputFloatingLabel from "../../InputFloatingLabel";
 import { toast } from "react-toastify";
 
 interface ClientFormProps {
-  id?: string;
   action: string;
   onSuccess?: (data: any) => void;
   onCancel?: () => void;
   initialData?: {
+    id?: string;
     cifNifNie: string;
     name: string;
     surname: string;
@@ -18,11 +18,11 @@ interface ClientFormProps {
   };
 }
 
-const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, initialData }: ClientFormProps) => {
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const ClientForm: FC<ClientFormProps> = ({ action, onCancel, onSuccess, initialData }: ClientFormProps) => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const formData = new FormData(event.currentTarget as HTMLFormElement);
     const payload = {
       endPointData: {  
         cifNifNie: formData.get("cifNifNie") as string,
@@ -31,14 +31,14 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
         phone: formData.get("phone") as string,
         email: formData.get("email") as string,
       }
-  };
+    };
 
-    if (id) {
-      payload.endPointData.id = id;
+    if (initialData?.id) {
+      payload.endPointData.id = initialData?.id;
     }
   
     try {
-      const response = await Service.useCases(action, payload);
+      await Service.useCases(action, payload);
     
       toast.success(action === "createClient" ? "Cliente creado con éxito" : "Cliente actualizado con éxito", {
         position: "top-right",
@@ -49,11 +49,13 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
         draggable: true,
         progress: undefined,
         theme: "light",
+      });
+
+      if (onSuccess) {
+        onSuccess(payload.endPointData);
       }
       
-      )
     } catch (error) {
-    
       toast.error("Error al procesar la solicitud", {
         position: "top-right",
         autoClose: 5000,
@@ -66,41 +68,36 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
       });
 
       console.error("Error al procesar la solicitud", error);
-
     }
   };
 
   return (
     <div className="min-width-full min-height-full">
-    <form onSubmit={handleSubmit} className="w-full space-y-4">
+      <form onSubmit={handleSubmit} className="w-full space-y-4">
         <InputFloatingLabel 
           id="name" 
           label="Nombre" 
           required={true}
           defaultValue={initialData?.name}
         />
-
         <InputFloatingLabel 
           id="surname" 
           label="Apellido" 
           required={true}
           defaultValue={initialData?.surname}
         />
-
         <InputFloatingLabel
           id="cifNifNie"
           label="Documento de identidad (CIF/NIF/NIE)"
           required={true}
           defaultValue={initialData?.cifNifNie}
         />
-
         <InputFloatingLabel
           id="phone"
           label="Teléfono"
           required={true}
           defaultValue={initialData?.phone}
         />
-
         <InputFloatingLabel
           id="email"
           label="Email"
@@ -108,17 +105,15 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
           required={true}
           defaultValue={initialData?.email}
         />
-
         {action === "updateClient" && (
           <button
-          type="button"
-          onClick={onCancel}
-          className="py-2 px-4 border rounded-md text-gray-500 hover:bg-gray-100"
-        >
+            type="button"
+            onClick={onCancel}
+            className="py-2 px-4 border rounded-md text-gray-500 hover:bg-gray-100"
+          >
             Cancelar
           </button>
         )}
-
         <button
           type="submit"
           className="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700"
@@ -129,5 +124,4 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
     </div>
   );
 };
-
 export default ClientForm;
