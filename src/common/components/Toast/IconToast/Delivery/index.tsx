@@ -1,3 +1,5 @@
+// Esto no funciona
+
 import { FC } from "react";
 import Icon from "../../../Icon/Delivery";
 

@@ -2,6 +2,7 @@
 import Service from "@/service/src";
 import { FC } from "react";
 import InputFloatingLabel from "../../InputFloatingLabel";
+import { toast } from "react-toastify";
 
 interface MerchantFormProps {
   id?: string;
@@ -35,12 +36,40 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
     }
 
     try {
-      const response = await Service.useCases(action, payload);
-      console.log("Datos enviados:", payload);
-      console.log("Respuesta de la API:", response);
+      Service.useCases(action, payload);
+
+      
+      toast.success(action === "createMerchant" ? "Merchant creado con éxito" : "Merchant actualizado con éxito", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+      )
+
+
       if (onSuccess) onSuccess(payload.endPointData);
+
+
     } catch (error) {
-      console.error("Error al llamar a la API:", error);
+
+      toast.error("Error al procesar la solicitud", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      
+      console.log("Error al procesar la solicitud", error);
+
     }
   };
 
@@ -80,6 +109,7 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
     </select>
 
       {onCancel && (
+
         <button
           type="button"
           onClick={onCancel}
@@ -87,13 +117,19 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, id, onCancel, onSuccess, 
         >
           Cancelar
         </button>
+
       )}
+
+
       <button
         type="submit"
         className="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700"
       >
+      
         {action === "updateMerchant" ? "Actualizar merchant" : "Crear merchant"}
+      
       </button>
+
     </form>
   );
 };

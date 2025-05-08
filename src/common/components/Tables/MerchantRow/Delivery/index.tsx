@@ -6,6 +6,7 @@ import { handleDelete } from "../Infrastructure/handleActions";
 import DeleteModal from "../../../Modals/DeleteModal/Delivery/index";
 import IconToast from "../../../Toast/IconToast/Delivery";
 import UpdateModal from "../../../Modals/UpdateModal/Delivery";
+import { toast } from "react-toastify";
 
 interface Merchant {
   id: string;
@@ -25,7 +26,6 @@ interface MerchantRowProps {
 const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
   return (
     <>
@@ -55,7 +55,18 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
             const result = await handleDelete({ merchantId: merchant.id, onDeleted });
             if (result.success) {
               setShowDeleteModal(false);
-              setShowToast(true);
+
+              toast.success("Merchant eliminado con éxito",
+                {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
             }
           }}
           onCancel={() => setShowDeleteModal(false)}
@@ -70,22 +81,12 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
           onSubmit={(updated) => {
             onUpdated(updated);
             setShowUpdateModal(false);
-            setShowToast(true);
           }}
           onConfirm={() => setShowUpdateModal(false)}
           onCancel={() => setShowUpdateModal(false)}
         />
       )}
 
-      {showToast && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-          <IconToast
-            icon="delete"
-            message="Acción realizada con éxito."
-            onClose={() => setShowToast(false)}
-          />
-        </div>
-      )}
     </>
   );
 };

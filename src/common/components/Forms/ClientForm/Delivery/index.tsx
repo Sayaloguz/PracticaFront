@@ -2,6 +2,7 @@
 import Service from "@/service/src";
 import { FC } from "react";
 import InputFloatingLabel from "../../InputFloatingLabel";
+import { toast } from "react-toastify";
 
 interface ClientFormProps {
   id?: string;
@@ -38,17 +39,34 @@ const ClientForm: FC<ClientFormProps> = ({ action, id, onSuccess, onCancel, init
   
     try {
       const response = await Service.useCases(action, payload);
-      toast.success("Cliente eliminado correctamente", {
+    
+      toast.success(action === "createClient" ? "Cliente creado con éxito" : "Cliente actualizado con éxito", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    });
+        theme: "light",
+      }
+      
+      )
     } catch (error) {
-      console.error("Error al llamar a la API:", error);
+    
+      toast.error("Error al procesar la solicitud", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+
+      console.error("Error al procesar la solicitud", error);
+
     }
   };
 

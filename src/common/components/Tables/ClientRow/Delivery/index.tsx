@@ -7,9 +7,8 @@ import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
 import { handleDelete } from "../Infrastructure/handleActions";
 import DeleteModal from "../../../Modals/DeleteModal/Delivery/index";
-import IconToast from "../../../Toast/IconToast/Delivery";
 import UpdateModal from "../../../Modals/UpdateModal/Delivery";
-
+import { toast } from "react-toastify";
 interface Client {
   id: string;
   cifNifNie: string;
@@ -31,8 +30,6 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   
-  const [showToast, setShowToast] = useState(false);
-
   const onClickDelete = () => {
     setShowDeleteModal(true);
   };
@@ -84,8 +81,19 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
           onConfirm={() => {
             handleDelete({ clientId: client.id, onDeleted });
             setShowDeleteModal(false);
-            setShowToast(true);
+
+            toast.success("Cliente eliminado con éxito", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
           }}
+
           onCancel={() => setShowDeleteModal(false)}
         />
       )}
@@ -97,21 +105,10 @@ const ClientRow = ({ client, isEven, onDeleted }: Props) => {
           initialData={client}
           onSubmit={() => {
             setShowUpdateModal(false);
-            setShowToast(true);
           }}
           onConfirm={() => setShowUpdateModal(false)}
           onCancel={() => setShowUpdateModal(false)}
         />
-      )}
-
-      {showToast && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
-          <IconToast 
-            icon="delete"
-            //message={`Cliente ${client.name} ${client.surname} eliminado con éxito.`
-            message="Acción realizada con éxito."
-          />
-        </div>
       )}
     </>
 

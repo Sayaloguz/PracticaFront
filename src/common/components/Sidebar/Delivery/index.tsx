@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Icon from "../../Icon/Delivery";
 import Image from "next/image";
-import CNN from "../../../utils/CNN.svg";
+import CNN from "../../../assets/CNN.svg";
 export default function Sidebar() {
   return (
     <aside className="sidebar">
