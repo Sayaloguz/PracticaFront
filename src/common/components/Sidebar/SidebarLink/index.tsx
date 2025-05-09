@@ -14,7 +14,7 @@ const SidebarLink = ({ href, icon, title }: SidebarLinkProps) => {
         className={clsx(
           "flex items-center gap-x-4 text-lg py-2 width-full mt-1 px-4 rounded-md hover:bg-gray-200 transition-colors duration-300",
           {
-            "bg-red-500 text-white hover:bg-red-700": pathname === href,
+            "bg-red-500 text-white hover:bg-red-700": pathname.includes(href),
           }
         )}
       >

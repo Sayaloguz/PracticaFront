@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
-import DeleteModalAntd from "../../../Modals/DeleteModalAntd/Delivery";
+import ConfirmModalAntd from "../../../Modals/ConfirmModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
 import Service from "@/service/src";
@@ -31,11 +31,11 @@ async function handleDelete({
 }
 
 const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const onClickDelete = () => {
-    setShowDeleteModal(true);
+    setShowConfirmModal(true);
   };
 
   const onClickUpdate = () => {
@@ -72,17 +72,17 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
         </td>
       </tr>
 
-      {showDeleteModal && (
-        <DeleteModalAntd
+      {showConfirmModal && (
+        <ConfirmModalAntd
           title="Eliminar cliente"
           message={`¿Estás seguro de que deseas eliminar a ${client.name} ${client.surname}?`}
-          open={showDeleteModal}
+          open={showConfirmModal}
           onConfirm={async () => {
             const result = await handleDelete({
               clientId: client.id,
               onDeleted,
             });
-            setShowDeleteModal(false);
+            setShowConfirmModal(false);
 
             if (result.success) {
               toast.success("Cliente eliminado con éxito", {
@@ -108,7 +108,7 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
               });
             }
           }}
-          onCancel={() => setShowDeleteModal(false)}
+          onCancel={() => setShowConfirmModal(false)}
         />
       )}
 

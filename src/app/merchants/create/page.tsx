@@ -26,7 +26,7 @@ export default function CreateMerchantPage() {
         <div className="md:w-1/4 mr-10 mt-8">
           <IconButton
             href="/merchants"
-            title="Volver a merchants"
+            title="Volver al listado de merchants"
             icon="back"
           />
         </div>

@@ -1,10 +1,8 @@
 import { Modal } from "antd";
 import { FC } from "react";
-import { DeleteModalAntdProps } from "./interface";
+import { ConfirmModalAntdProps } from "./interface";
 
-// TODO: Cambiar nombre para hacerlo genérico del todo
-
-const DeleteModalAntd: FC<DeleteModalAntdProps> = ({
+const ConfirmModalAntd: FC<ConfirmModalAntdProps> = ({
   title,
   message,
   open,
@@ -50,4 +48,4 @@ const DeleteModalAntd: FC<DeleteModalAntdProps> = ({
   );
 };
 
-export default DeleteModalAntd;
+export default ConfirmModalAntd;

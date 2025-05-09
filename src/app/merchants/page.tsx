@@ -27,7 +27,7 @@ export default async function MerchantsPage({
 
       <MainTitle title="Merchants" />
 
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full px-6">
         <Search placeholder="Buscar merchant por nombre" />
         <IconButton
           title="Añadir merchant"

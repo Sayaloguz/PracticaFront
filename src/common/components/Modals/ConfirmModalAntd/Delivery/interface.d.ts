@@ -1,4 +1,4 @@
-export interface DeleteModalAntdProps {
+export interface ConfirmModalAntdProps {
   title: string;
   message: string;
   open: boolean;

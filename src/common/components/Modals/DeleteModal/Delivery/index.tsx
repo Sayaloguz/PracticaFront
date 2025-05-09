@@ -1,4 +1,5 @@
-import { FC } from "react";
+// No se usa, pero lo dejo por si acaso
+/*import { FC } from "react";
 import { DeleteModalProps } from "./interface";
 
 const DeleteModal: FC<DeleteModalProps> = ({
@@ -71,3 +72,4 @@ const DeleteModal: FC<DeleteModalProps> = ({
 };
 
 export default DeleteModal;
+*/

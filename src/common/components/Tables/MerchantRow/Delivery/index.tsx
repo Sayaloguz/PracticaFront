@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
-import DeleteModalAntd from "../../../Modals/DeleteModalAntd/Delivery";
+import ConfirmModalAntd from "../../../Modals/ConfirmModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
 import Service from "@/service/src";
+import { MerchantRowProps } from "./interface";
 
 // TODO: Sacarlo a un componente servidor
 async function handleDelete({
@@ -36,7 +37,7 @@ const MerchantRow = ({
   onDeleted,
   onUpdated,
 }: MerchantRowProps) => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   return (
@@ -52,7 +53,7 @@ const MerchantRow = ({
         <td className="px-6 py-4">{merchant.gindexClient}</td>
         <td className="px-6 py-4 flex gap-3">
           <button
-            onClick={() => setShowDeleteModal(true)}
+            onClick={() => setShowConfirmModal(true)}
             className="text-red-600 hover:underline"
           >
             <Icon id="delete" />
@@ -66,17 +67,17 @@ const MerchantRow = ({
         </td>
       </tr>
 
-      {showDeleteModal && (
-        <DeleteModalAntd
+      {showConfirmModal && (
+        <ConfirmModalAntd
           title="Eliminar merchant"
           message={`¿Estás seguro de que deseas eliminar el merchant ${merchant.name}?`}
-          open={showDeleteModal}
+          open={showConfirmModal}
           onConfirm={async () => {
             const result = await handleDelete({
               merchantId: merchant.id,
               onDeleted,
             });
-            setShowDeleteModal(false);
+            setShowConfirmModal(false);
 
             if (result.success) {
               toast.success("Merchant eliminado con éxito", {
@@ -102,7 +103,7 @@ const MerchantRow = ({
               });
             }
           }}
-          onCancel={() => setShowDeleteModal(false)}
+          onCancel={() => setShowConfirmModal(false)}
         />
       )}
 

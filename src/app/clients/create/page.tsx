@@ -24,7 +24,11 @@ export default function CreateClientPage() {
       <div className="flex items-center justify-between w-full">
         <MainTitle title="Crear cliente" />
         <div className="md:w-1/4 mr-10 mt-8">
-          <IconButton href="/clients" title="Volver a clientes" icon="back" />
+          <IconButton
+            href="/clients"
+            title="Volver al listado de clientes"
+            icon="back"
+          />
         </div>
       </div>
 
