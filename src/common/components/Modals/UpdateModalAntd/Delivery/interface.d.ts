@@ -1,6 +1,7 @@
 export interface UpdateModalAntdProps {
   // TODO: Pasar el action y controlar desde ahí el formulario que se va a presentar
   title: string;
+  action: string;
   open: boolean;
   onSubmit: (updated: Utility.Client | Utility.Merchant) => void;
   onCancel: () => void;

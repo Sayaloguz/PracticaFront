@@ -8,6 +8,7 @@ import { UpdateModalAntdProps } from "./interface";
 
 const UpdateModalAntd: FC<UpdateModalAntdProps> = ({
   title,
+  action,
   open,
   onCancel,
   onSubmit,
@@ -15,9 +16,9 @@ const UpdateModalAntd: FC<UpdateModalAntdProps> = ({
 }) => {
   return (
     <Modal title={title} open={open} onCancel={onCancel} footer={null} centered>
-      {title === "Actualizar cliente" && (
+      {action === "updateClient" && (
         <ClientForm
-          action="updateClient"
+          action={action}
           onCancel={onCancel}
           onSuccess={(updatedClient) => {
             onSubmit(updatedClient);
@@ -26,9 +27,9 @@ const UpdateModalAntd: FC<UpdateModalAntdProps> = ({
         />
       )}
 
-      {title === "Actualizar merchant" && (
+      {action === "updateMerchant" && (
         <MerchantForm
-          action="updateMerchant"
+          action={action}
           onCancel={onCancel}
           onSuccess={onSubmit}
           initialData={initialData}

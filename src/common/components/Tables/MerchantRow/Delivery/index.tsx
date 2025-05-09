@@ -110,6 +110,7 @@ const MerchantRow = ({
       {showUpdateModal && (
         <UpdateModalAntd
           title="Actualizar merchant"
+          action="updateMerchant"
           open={showUpdateModal}
           initialData={merchant}
           onSubmit={(updated) => {

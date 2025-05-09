@@ -115,6 +115,7 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
       {showUpdateModal && (
         <UpdateModalAntd
           title="Actualizar cliente"
+          action="updateClient"
           open={showUpdateModal}
           initialData={client}
           onSubmit={(updatedClient) => {
