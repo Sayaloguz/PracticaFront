@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
 import Service from "@/service/src";
-import { MerchantsTableSkeleton } from "@/common/components/Skelletons/MerchantsTableSkelleton";
+import { MerchantsTableSkeleton } from "@/common/components/Skeletons/MerchantsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
 
 async function MerchantResults({

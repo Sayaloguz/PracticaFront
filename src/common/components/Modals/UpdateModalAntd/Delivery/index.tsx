@@ -2,26 +2,9 @@ import { Modal } from "antd";
 import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
 import MerchantForm from "@/common/components/Forms/MerchantForm/Delivery";
 import { FC } from "react";
+import { UpdateModalAntdProps } from "./interface";
 
-interface UpdateModalAntdProps {
-  // TODO: Controlar los posibles títulos ya que puede afectar a la lógica
-  title: string;
-  open: boolean;
-  // TODO: Ver como cambiar a tipo específico pudiendo ser client o merchant en vez de any
-  onSubmit: (updated: any) => void;
-  onCancel: () => void;
-  initialData: {
-    id: string;
-    name: string;
-    address?: string;
-    merchantType?: string;
-    gindexClient?: string;
-    cifNifNie?: string;
-    surname?: string;
-    phone?: string;
-    email?: string;
-  };
-}
+// Cliente | Merchant
 
 const UpdateModalAntd: FC<UpdateModalAntdProps> = ({
   title,

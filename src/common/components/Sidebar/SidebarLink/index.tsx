@@ -2,12 +2,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "../../Icon/Delivery";
 import clsx from "clsx";
+import { SidebarLinkProps } from "./interface";
 
-interface SidebarLinkProps {
-  href: string;
-  icon: any;
-  title: string;
-}
 const SidebarLink = ({ href, icon, title }: SidebarLinkProps) => {
   const pathname = usePathname();
 

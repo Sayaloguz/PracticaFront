@@ -2,19 +2,7 @@
 
 import { FC, useState } from "react";
 import ClientRow from "../../ClientRow/Delivery";
-
-interface Client {
-  id: string;
-  cifNifNie: string;
-  name: string;
-  surname: string;
-  phone: string;
-  email: string;
-}
-
-interface ClientsTableProps {
-  tableData: Client[];
-}
+import { ClientsTableProps } from "./interface";
 
 const ClientsTable: FC<ClientsTableProps> = ({
   tableData,
@@ -25,7 +13,7 @@ const ClientsTable: FC<ClientsTableProps> = ({
     setClients((prev) => prev.filter((c) => c.id !== id));
   };
 
-  const handleUpdated = (updatedClient: Client) => {
+  const handleUpdated = (updatedClient: Utility.Client) => {
     setClients((prev) =>
       prev.map((client) =>
         client.id === updatedClient.id ? updatedClient : client
@@ -33,9 +21,12 @@ const ClientsTable: FC<ClientsTableProps> = ({
     );
   };
 
-  // TODO: Añadir un handleCreate para actualizar la tabla al crear un cliente
-
-  if (clients.length === 0) return <p>No hay resultados</p>;
+  if (clients.length === 0)
+    return (
+      <p className="mt-20 font-bold text-center">
+        No hay clientes actualmente.
+      </p>
+    );
 
   return (
     <div className="mr-2 ml-2 relative overflow-x-auto shadow-md sm:rounded-lg mt-4">

@@ -1,13 +1,8 @@
 import { Modal } from "antd";
 import { FC } from "react";
+import { DeleteModalAntdProps } from "./interface";
 
-interface DeleteModalAntdProps {
-  title: string;
-  message: string;
-  open: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-}
+// TODO: Cambiar nombre para hacerlo genérico del todo
 
 const DeleteModalAntd: FC<DeleteModalAntdProps> = ({
   title,
@@ -47,7 +42,7 @@ const DeleteModalAntd: FC<DeleteModalAntdProps> = ({
             type="button"
             className="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
           >
-            Sí, quiero borrarlo
+            Aceptar
           </button>
         </div>
       </div>

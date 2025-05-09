@@ -2,18 +2,7 @@
 
 import { FC, useState } from "react";
 import MerchantRow from "../../MerchantRow/Delivery";
-
-interface Merchant {
-  id: string;
-  name: string;
-  address: string;
-  merchantType: string;
-  gindexClient: string;
-}
-
-interface MerchantsTableProps {
-  tableData: Merchant[];
-}
+import { MerchantsTableProps } from "./interface";
 
 const MerchantsTable: FC<MerchantsTableProps> = ({ tableData }) => {
   const [merchants, setMerchants] = useState(tableData);
@@ -22,14 +11,18 @@ const MerchantsTable: FC<MerchantsTableProps> = ({ tableData }) => {
     setMerchants((prev) => prev.filter((c) => c.id !== id));
   };
 
-  const handleUpdated = (updated: Merchant) => {
+  const handleUpdated = (updated: Utility.Merchant) => {
     setMerchants((prev) =>
       prev.map((m) => (m.id === updated.id ? updated : m))
     );
   };
 
-  // TODO: Darle un poco de estilo al "no hay resultados"
-  if (merchants.length === 0) return <p>No hay resultados</p>;
+  if (merchants.length === 0)
+    return (
+      <p className="mt-20 font-bold text-center">
+        No hay merchants actualmente.
+      </p>
+    );
 
   return (
     <div className="ml-2 mr-2 relative overflow-x-auto shadow-md sm:rounded-lg mt-4">

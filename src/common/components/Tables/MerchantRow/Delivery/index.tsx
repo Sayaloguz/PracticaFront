@@ -7,20 +7,6 @@ import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
 import Service from "@/service/src";
 
-interface Merchant {
-  id: string;
-  name: string;
-  address: string;
-  merchantType: string;
-  gindexClient: string;
-}
-
-interface MerchantRowProps {
-  merchant: Merchant;
-  isEven: boolean;
-  onDeleted: (id: string) => void;
-  onUpdated: (merchant: Merchant) => void;
-}
 // TODO: Sacarlo a un componente servidor
 async function handleDelete({
   merchantId,

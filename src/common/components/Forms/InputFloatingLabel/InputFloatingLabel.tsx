@@ -1,10 +1,5 @@
-import React, { FC, InputHTMLAttributes } from "react";
-
-interface InputFloatingLabelProps
-  extends InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  label: string;
-}
+import React, { FC } from "react";
+import { InputFloatingLabelProps } from "./interface";
 
 const InputFloatingLabel: FC<InputFloatingLabelProps> = ({
   id,

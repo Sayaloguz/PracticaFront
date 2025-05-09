@@ -1,10 +1,6 @@
 import { FC } from "react";
 import Image from "next/image";
-
-interface BigDecorativeImageProps {
-  src: string;
-  alt: string;
-}
+import { BigDecorativeImageProps } from "./interface";
 
 const BigDecorativeImage: FC<BigDecorativeImageProps> = ({ src, alt }) => {
   return (

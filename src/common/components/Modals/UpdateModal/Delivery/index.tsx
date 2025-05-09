@@ -2,23 +2,7 @@ import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
 import MerchantForm from "@/common/components/Forms/MerchantForm/Delivery";
 import SecondaryTitle from "@/common/components/Titles/SecondaryTitle";
 import { FC } from "react";
-
-interface UpdateModalProps {
-  title: string;
-  onSubmit: (updated: any) => void;
-  onCancel: () => void;
-  initialData: {
-    id: string;
-    name: string;
-    address?: string;
-    merchantType?: string;
-    gindexClient?: string;
-    cifNifNie?: string;
-    surname?: string;
-    phone?: string;
-    email?: string;
-  };
-}
+import { UpdateModalProps } from "./interface";
 
 const UpdateModal: FC<UpdateModalProps> = ({
   title,

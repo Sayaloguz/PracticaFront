@@ -1,5 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare namespace Utility {
+  type JSONValue = Record<string, any>;
 
-    type JSONValue = Record<string, any>;
+  type Client = {
+    id?: string;
+    cifNifNie: string;
+    name: string;
+    surname: string;
+    phone: string;
+    email: string;
+  };
+
+  type Merchant = {
+    id?: string;
+    name: string;
+    address: string;
+    merchantType: string;
+    gindexClient: string;
+  };
+
+  /*
+  const icons = {
+    edit: EditIcon;
+    delete: DeleteIcon;
+    info: InfoIcon;
+    close: CloseIcon;
+    users: UsersIcon;
+    store: StoreIcon;
+    add: AddIcon;
+    addUser: UserPlusIcon;
+  } as const; */
 }

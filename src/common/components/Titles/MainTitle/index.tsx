@@ -1,8 +1,5 @@
 import { FC } from "react";
-
-interface MainTitleProps {
-  title: string;
-}
+import { MainTitleProps } from "./interface";
 
 const MainTitle: FC<MainTitleProps> = ({ title }) => {
   return (

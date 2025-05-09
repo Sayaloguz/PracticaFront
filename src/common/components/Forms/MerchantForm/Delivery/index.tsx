@@ -1,29 +1,9 @@
 "use client";
 import Service from "@/service/src";
 import { FC } from "react";
-import InputFloatingLabel from "../../InputFloatingLabel";
+import InputFloatingLabel from "../../InputFloatingLabel/InputFloatingLabel";
 import { toast } from "react-toastify";
-
-// TODO: Mover a utils?
-interface Merchant {
-  id?: string;
-  name: string;
-  address: string;
-  merchantType: string;
-  gindexClient: string;
-}
-interface MerchantFormProps {
-  action: string;
-  onCancel?: () => void;
-  onSuccess?: (merchant: Merchant) => void;
-  initialData?: {
-    id: string;
-    name: string;
-    address: string;
-    merchantType: string;
-    gindexClient: string;
-  };
-}
+import { MerchantFormProps } from "./interface";
 
 const MerchantForm: FC<MerchantFormProps> = ({
   action,

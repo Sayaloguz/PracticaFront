@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Icon from "../../../Icon/Delivery";
@@ -6,22 +6,7 @@ import DeleteModalAntd from "../../../Modals/DeleteModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
 import Service from "@/service/src";
-
-interface Client {
-  id: string;
-  cifNifNie: string;
-  name: string;
-  surname: string;
-  phone: string;
-  email: string;
-}
-
-interface Props {
-  client: Client;
-  isEven: boolean;
-  onDeleted: (id: string) => void; 
-  onUpdate: (updatedClient: Client) => void; 
-}
+import { ClientRowProps } from "./interface";
 
 async function handleDelete({
   clientId,
@@ -45,7 +30,7 @@ async function handleDelete({
   }
 }
 
-const ClientRow = ({ client, isEven, onDeleted, onUpdate }: Props) => {
+const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -93,7 +78,10 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: Props) => {
           message={`¿Estás seguro de que deseas eliminar a ${client.name} ${client.surname}?`}
           open={showDeleteModal}
           onConfirm={async () => {
-            const result = await handleDelete({ clientId: client.id, onDeleted });
+            const result = await handleDelete({
+              clientId: client.id,
+              onDeleted,
+            });
             setShowDeleteModal(false);
 
             if (result.success) {
@@ -130,7 +118,7 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: Props) => {
           open={showUpdateModal}
           initialData={client}
           onSubmit={(updatedClient) => {
-            onUpdate(updatedClient); 
+            onUpdate(updatedClient);
             setShowUpdateModal(false);
           }}
           onCancel={() => setShowUpdateModal(false)}

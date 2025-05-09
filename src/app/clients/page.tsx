@@ -2,9 +2,10 @@ import { Suspense } from "react";
 import ClientsTable from "@/common/components/Tables/ClientsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
 import Service from "@/service/src";
-import { ClientsTableSkeleton } from "@/common/components/Skelletons/ClientsTableSkelleton";
+import { ClientsTableSkeleton } from "@/common/components/Skeletons/ClientsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
 
+// TODO: Sacar esto de aquí por legibilidad
 async function ClientResults({
   searchParams,
 }: {
@@ -16,6 +17,7 @@ async function ClientResults({
   const endPointData =
     query.length > 0 ? { endPointData: { name: query } } : {};
 
+  // TODO: Cambiar esto a infrastructure
   const response = await Service.useCases(action, endPointData);
   const data = Array.isArray(response) ? response : response?.data || [];
 

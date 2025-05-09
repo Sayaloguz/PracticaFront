@@ -1,11 +1,5 @@
 import { FC } from "react";
-
-interface DeleteModalProps {
-  title: string;
-  message: string;
-  onConfirm: () => void;
-  onCancel: () => void;
-}
+import { DeleteModalProps } from "./interface";
 
 const DeleteModal: FC<DeleteModalProps> = ({
   title,

@@ -1,31 +1,9 @@
 "use client";
 import Service from "@/service/src";
 import { FC } from "react";
-import InputFloatingLabel from "../../InputFloatingLabel";
+import InputFloatingLabel from "../../InputFloatingLabel/InputFloatingLabel";
 import { toast } from "react-toastify";
-
-// TODO: Mover a utils?
-interface Client {
-  id: string;
-  cifNifNie: string;
-  name: string;
-  surname: string;
-  phone: string;
-  email: string;
-}
-interface ClientFormProps {
-  action: string;
-  onSuccess?: (data: Client) => void;
-  onCancel?: () => void;
-  initialData?: {
-    id: string;
-    cifNifNie: string;
-    name: string;
-    surname: string;
-    phone: string;
-    email: string;
-  };
-}
+import { ClientFormProps } from "./interface";
 
 const ClientForm: FC<ClientFormProps> = ({
   action,
@@ -36,6 +14,7 @@ const ClientForm: FC<ClientFormProps> = ({
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    // TODO: Ver hook de formularios y ver antd
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const payload = {
       endPointData: {
