@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} antialiased layout`}>
+      <body className={`${roboto.className} antialiased layout px-4 py-2`}>
         <Sidebar />
         <div className="content">
           <main className="main">{children}</main>

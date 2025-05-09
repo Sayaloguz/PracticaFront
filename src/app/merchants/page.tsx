@@ -1,26 +1,11 @@
 import { Suspense } from "react";
-import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
-import Service from "@/service/src";
 import { MerchantsTableSkeleton } from "@/common/components/Skeletons/MerchantsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
-
-async function MerchantResults({
-  searchParams,
-}: {
-  searchParams: { query?: string };
-}) {
-  const query = searchParams?.query || "";
-
-  const action = query.length > 0 ? "getMerchantsByName" : "getMerchants";
-  const endPointData =
-    query.length > 0 ? { endPointData: { name: query } } : {};
-
-  const response = await Service.useCases(action, endPointData);
-  const data = Array.isArray(response) ? response : response?.data || [];
-
-  return <MerchantsTable tableData={data} />;
-}
+import { MerchantResults } from "./infrastructure/functions";
+import IconButton from "@/common/components/Buttons/IconButton/Delivery";
+import { Breadcrumb } from "antd";
+import Link from "next/link";
 
 export default async function MerchantsPage({
   searchParams,
@@ -29,9 +14,27 @@ export default async function MerchantsPage({
 }) {
   return (
     <section>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link href="/">Home</Link>,
+          },
+          {
+            title: "Merchants",
+          },
+        ]}
+      />
+
       <MainTitle title="Merchants" />
 
-      <Search placeholder="Buscar merchant por nombre" />
+      <div className="flex items-center justify-between w-full">
+        <Search placeholder="Buscar merchant por nombre" />
+        <IconButton
+          title="Añadir merchant"
+          href="/merchants/create"
+          icon="add"
+        />
+      </div>
 
       <Suspense key={searchParams?.query} fallback={<MerchantsTableSkeleton />}>
         <MerchantResults searchParams={searchParams || {}} />

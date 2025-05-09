@@ -1,28 +1,11 @@
 import { Suspense } from "react";
-import ClientsTable from "@/common/components/Tables/ClientsTable/Delivery";
 import Search from "@/common/components/Search/Delivery";
-import Service from "@/service/src";
 import { ClientsTableSkeleton } from "@/common/components/Skeletons/ClientsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
-
-// TODO: Sacar esto de aquí por legibilidad
-async function ClientResults({
-  searchParams,
-}: {
-  searchParams: { query?: string };
-}) {
-  const query = searchParams?.query || "";
-
-  const action = query.length > 0 ? "getClientsByName" : "getClients";
-  const endPointData =
-    query.length > 0 ? { endPointData: { name: query } } : {};
-
-  // TODO: Cambiar esto a infrastructure
-  const response = await Service.useCases(action, endPointData);
-  const data = Array.isArray(response) ? response : response?.data || [];
-
-  return <ClientsTable tableData={data} />;
-}
+import { ClientResults } from "./infrastructure/functions";
+import IconButton from "@/common/components/Buttons/IconButton/Delivery";
+import { Breadcrumb } from "antd";
+import Link from "next/link";
 
 export default function ClientsPage({
   searchParams,
@@ -31,9 +14,27 @@ export default function ClientsPage({
 }) {
   return (
     <section>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link href="/">Home</Link>,
+          },
+          {
+            title: "Clients",
+          },
+        ]}
+      />
+
       <MainTitle title="Clientes" />
 
-      <Search placeholder="Buscar cliente" />
+      <div className="flex items-center justify-between w-full">
+        <Search placeholder="Buscar cliente" />
+        <IconButton
+          title="Añadir cliente"
+          href="/clients/create"
+          icon="addUser"
+        />
+      </div>
 
       <Suspense key={searchParams?.query} fallback={<ClientsTableSkeleton />}>
         <ClientResults searchParams={searchParams || {}} />

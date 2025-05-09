@@ -18,16 +18,4 @@ declare namespace Utility {
     merchantType: string;
     gindexClient: string;
   };
-
-  /*
-  const icons = {
-    edit: EditIcon;
-    delete: DeleteIcon;
-    info: InfoIcon;
-    close: CloseIcon;
-    users: UsersIcon;
-    store: StoreIcon;
-    add: AddIcon;
-    addUser: UserPlusIcon;
-  } as const; */
 }

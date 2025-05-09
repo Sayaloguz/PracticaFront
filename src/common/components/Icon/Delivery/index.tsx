@@ -8,6 +8,7 @@ import UsersIcon from "../UsersIcon";
 import StoreIcon from "../StoreIcon";
 import AddIcon from "../AddIcon";
 import UserPlusIcon from "../UserPlusIcon";
+import BackIcon from "../BackIcon";
 
 interface IconProps {
   id: keyof typeof icons; // Solo puede ser una de las claves de icons
@@ -22,6 +23,7 @@ const icons = {
   store: StoreIcon,
   add: AddIcon,
   addUser: UserPlusIcon,
+  back: BackIcon,
 };
 
 const Icon: FC<IconProps> = ({ id }) => {

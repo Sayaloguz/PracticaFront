@@ -19,17 +19,9 @@ export default function Sidebar() {
       </Link>
       <ul className="pt-6">
         <SidebarLink href="/clients" icon="users" title="Clients" />
-        <SidebarLink
-          href="/clients/create"
-          icon="addUser"
-          title="Crear cliente"
-        />
+
         <SidebarLink href="/merchants" icon="store" title="Merchants" />
-        <SidebarLink
-          href="/merchants/create"
-          icon="add"
-          title="Crear merchant"
-        />
+
         <SidebarLink href="/about" icon="info" title="About" />
       </ul>
     </aside>
