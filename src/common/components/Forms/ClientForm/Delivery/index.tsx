@@ -4,12 +4,21 @@ import { FC } from "react";
 import InputFloatingLabel from "../../InputFloatingLabel";
 import { toast } from "react-toastify";
 
+// TODO: Mover a utils?
+interface Client {
+  id: string;
+  cifNifNie: string;
+  name: string;
+  surname: string;
+  phone: string;
+  email: string;
+}
 interface ClientFormProps {
   action: string;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: Client) => void;
   onCancel?: () => void;
   initialData?: {
-    id?: string;
+    id: string;
     cifNifNie: string;
     name: string;
     surname: string;
@@ -18,43 +27,52 @@ interface ClientFormProps {
   };
 }
 
-const ClientForm: FC<ClientFormProps> = ({ action, onCancel, onSuccess, initialData }: ClientFormProps) => {
+const ClientForm: FC<ClientFormProps> = ({
+  action,
+  onCancel,
+  onSuccess,
+  initialData,
+}: ClientFormProps) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const payload = {
-      endPointData: {  
+      endPointData: {
         cifNifNie: formData.get("cifNifNie") as string,
         name: formData.get("name") as string,
         surname: formData.get("surname") as string,
         phone: formData.get("phone") as string,
         email: formData.get("email") as string,
-      }
+      },
     };
 
     if (initialData?.id) {
       payload.endPointData.id = initialData?.id;
     }
-  
+
     try {
       await Service.useCases(action, payload);
-    
-      toast.success(action === "createClient" ? "Cliente creado con éxito" : "Cliente actualizado con éxito", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+
+      toast.success(
+        action === "createClient"
+          ? "Cliente creado con éxito"
+          : "Cliente actualizado con éxito",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
 
       if (onSuccess) {
         onSuccess(payload.endPointData);
       }
-      
     } catch (error) {
       toast.error("Error al procesar la solicitud", {
         position: "top-right",
@@ -74,15 +92,15 @@ const ClientForm: FC<ClientFormProps> = ({ action, onCancel, onSuccess, initialD
   return (
     <div className="min-width-full min-height-full">
       <form onSubmit={handleSubmit} className="w-full space-y-4">
-        <InputFloatingLabel 
-          id="name" 
-          label="Nombre" 
+        <InputFloatingLabel
+          id="name"
+          label="Nombre"
           required={true}
           defaultValue={initialData?.name}
         />
-        <InputFloatingLabel 
-          id="surname" 
-          label="Apellido" 
+        <InputFloatingLabel
+          id="surname"
+          label="Apellido"
           required={true}
           defaultValue={initialData?.surname}
         />

@@ -7,9 +7,7 @@ export default function CreateClientPage() {
       <MainTitle title="Crear cliente" />
 
       <div className="w-1/2 mt-10 mb-10 mx-auto">
-        <ClientForm action="createClient"
-        
-        />
+        <ClientForm action="createClient" />
       </div>
     </section>
   );

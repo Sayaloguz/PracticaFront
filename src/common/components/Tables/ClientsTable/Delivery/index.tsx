@@ -13,26 +13,32 @@ interface Client {
 }
 
 interface ClientsTableProps {
-  initialData: Client[];
+  tableData: Client[];
 }
 
-const ClientsTable: FC<ClientsTableProps> = ({ initialData }: ClientsTableProps) => {
-  const [clients, setClients] = useState(initialData);
+const ClientsTable: FC<ClientsTableProps> = ({
+  tableData,
+}: ClientsTableProps) => {
+  const [clients, setClients] = useState(tableData);
 
   const handleDeleted = (id: string) => {
     setClients((prev) => prev.filter((c) => c.id !== id));
   };
 
   const handleUpdated = (updatedClient: Client) => {
-    setClients((prev) =>  
-      prev.map((client) => (client.id === updatedClient.id ? updatedClient : client))
+    setClients((prev) =>
+      prev.map((client) =>
+        client.id === updatedClient.id ? updatedClient : client
+      )
     );
-  }
+  };
+
+  // TODO: Añadir un handleCreate para actualizar la tabla al crear un cliente
 
   if (clients.length === 0) return <p>No hay resultados</p>;
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+    <div className="mr-2 ml-2 relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
       <table className="w-full text-sm text-left text-gray-600">
         <thead className="text-xs text-gray-700 uppercase bg-gray-100">
           <tr>
@@ -51,7 +57,7 @@ const ClientsTable: FC<ClientsTableProps> = ({ initialData }: ClientsTableProps)
               client={client}
               isEven={index % 2 === 0}
               onDeleted={handleDeleted}
-              onUpdate={handleUpdated} 
+              onUpdate={handleUpdated}
             />
           ))}
         </tbody>

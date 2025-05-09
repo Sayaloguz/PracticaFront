@@ -12,11 +12,11 @@ interface Merchant {
 }
 
 interface MerchantsTableProps {
-  initialData: Merchant[];
+  tableData: Merchant[];
 }
 
-const MerchantsTable: FC<MerchantsTableProps> = ({ initialData }) => {
-  const [merchants, setMerchants] = useState(initialData);
+const MerchantsTable: FC<MerchantsTableProps> = ({ tableData }) => {
+  const [merchants, setMerchants] = useState(tableData);
 
   const handleDeleted = (id: string) => {
     setMerchants((prev) => prev.filter((c) => c.id !== id));
@@ -28,10 +28,11 @@ const MerchantsTable: FC<MerchantsTableProps> = ({ initialData }) => {
     );
   };
 
+  // TODO: Darle un poco de estilo al "no hay resultados"
   if (merchants.length === 0) return <p>No hay resultados</p>;
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+    <div className="ml-2 mr-2 relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
       <table className="w-full text-sm text-left text-gray-600">
         <thead className="text-xs text-gray-700 uppercase bg-gray-100">
           <tr>

@@ -4,21 +4,22 @@ import { FC } from "react";
 interface DeleteModalAntdProps {
   title: string;
   message: string;
-  open: boolean; // Controla la visibilidad del modal
+  open: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const DeleteModalAntd: FC<DeleteModalAntdProps> = ({ title, message, open, onConfirm, onCancel }) => {
+const DeleteModalAntd: FC<DeleteModalAntdProps> = ({
+  title,
+  message,
+  open,
+  onConfirm,
+  onCancel,
+}) => {
   return (
-    <Modal
-      title={title}
-      open={open}
-      onCancel={onCancel}
-      footer={null} // Eliminamos el footer para personalizar los botones
-      centered
-    >
+    <Modal title={title} open={open} onCancel={onCancel} footer={null} centered>
       <div className="text-center">
+        {/* TODO: Sustituir luego por un icono componente por coherencia con el resto de la aplicación */}
         <svg
           className="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
           aria-hidden="true"

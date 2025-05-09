@@ -21,7 +21,7 @@ interface MerchantRowProps {
   onDeleted: (id: string) => void;
   onUpdated: (merchant: Merchant) => void;
 }
-
+// TODO: Sacarlo a un componente servidor
 async function handleDelete({
   merchantId,
   onDeleted,
@@ -44,22 +44,37 @@ async function handleDelete({
   }
 }
 
-const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProps) => {
+const MerchantRow = ({
+  merchant,
+  isEven,
+  onDeleted,
+  onUpdated,
+}: MerchantRowProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   return (
     <>
-      <tr className={`${isEven ? "bg-white" : "bg-gray-50"} border-b hover:bg-gray-100`}>
+      <tr
+        className={`${
+          isEven ? "bg-white" : "bg-gray-50"
+        } border-b hover:bg-gray-100`}
+      >
         <td className="px-6 py-4">{merchant.name}</td>
         <td className="px-6 py-4">{merchant.address}</td>
         <td className="px-6 py-4">{merchant.merchantType}</td>
         <td className="px-6 py-4">{merchant.gindexClient}</td>
         <td className="px-6 py-4 flex gap-3">
-          <button onClick={() => setShowDeleteModal(true)} className="text-red-600 hover:underline">
+          <button
+            onClick={() => setShowDeleteModal(true)}
+            className="text-red-600 hover:underline"
+          >
             <Icon id="delete" />
           </button>
-          <button onClick={() => setShowUpdateModal(true)} className="text-blue-600 hover:underline">
+          <button
+            onClick={() => setShowUpdateModal(true)}
+            className="text-blue-600 hover:underline"
+          >
             <Icon id="edit" />
           </button>
         </td>
@@ -71,7 +86,10 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
           message={`¿Estás seguro de que deseas eliminar el merchant ${merchant.name}?`}
           open={showDeleteModal}
           onConfirm={async () => {
-            const result = await handleDelete({ merchantId: merchant.id, onDeleted });
+            const result = await handleDelete({
+              merchantId: merchant.id,
+              onDeleted,
+            });
             setShowDeleteModal(false);
 
             if (result.success) {

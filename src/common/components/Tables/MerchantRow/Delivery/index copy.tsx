@@ -1,4 +1,5 @@
 // Versión previa al uso de antd
+/*
 "use client";
 
 import { useState } from "react";
@@ -122,3 +123,4 @@ const MerchantRow = ({ merchant, isEven, onDeleted, onUpdated }: MerchantRowProp
 };
 
 export default MerchantRow;
+*/

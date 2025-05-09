@@ -6,7 +6,7 @@ export const MERCHANT_QUERIES = {
     getMerchantById: ({id}) => `http://localhost:8082/api/getById/${id}`,
     getMerchantsByName: ({name}) => `http://localhost:8082/api/getByName/${name}`,
     updateMerchant: () => `http://localhost:8082/api/update`,
-    deleteMerchant: ({id}) => `http://localhost:8082/api/deleteMerchant/${id}`, // No existe aún
+    deleteMerchant: ({id}) => `http://localhost:8082/api/deleteMerchant/${id}`,
     createMerchant: () => `http://localhost:8082/api/create`
   };
   

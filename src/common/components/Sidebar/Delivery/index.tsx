@@ -1,48 +1,36 @@
+"use client";
+
 import Link from "next/link";
-import Icon from "../../Icon/Delivery";
 import Image from "next/image";
 import CNN from "../../../assets/CNN.svg";
+import SidebarLink from "../SidebarLink";
+
 export default function Sidebar() {
   return (
-    <aside className="sidebar">
+    <aside className="sidebar h-full bg-gray-100">
       <Link href="/">
-        <Image src={CNN} alt="prueba" width={200} height={200} />        
+        <Image
+          src={CNN}
+          alt="prueba"
+          width={200}
+          height={200}
+          className="hover:scale-105 transition-transform duration-300"
+        />
       </Link>
-      <ul>
-        <li>
-          <Link href="/clients" className="flex items-center gap-x-3 text-lg py-2">
-            <Icon id="users" className="w-6 h-6" /> 
-            Clients
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/clients/create" className="flex items-center gap-x-3 text-lg py-2">
-            <Icon id="addUser" className="w-6 h-6" />
-            Crear client
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/merchants" className="flex items-center gap-x-3 text-lg py-2">
-            <Icon id="store" className="w-6 h-6" />
-            Merchants
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/merchants/create" className="flex items-center gap-x-3 text-lg py-2">
-            <Icon id="add" className="w-6 h-6" />
-            Crear merchant
-          </Link>
-        </li>
-
-        <li>
-          <Link href="/about" className="flex items-center gap-x-3 text-lg py-2">
-            <Icon id="info" className="w-6 h-6" />
-            About
-          </Link>
-        </li>
+      <ul className="pt-6">
+        <SidebarLink href="/clients" icon="users" title="Clients" />
+        <SidebarLink
+          href="/clients/create"
+          icon="addUser"
+          title="Crear cliente"
+        />
+        <SidebarLink href="/merchants" icon="store" title="Merchants" />
+        <SidebarLink
+          href="/merchants/create"
+          icon="add"
+          title="Crear merchant"
+        />
+        <SidebarLink href="/about" icon="info" title="About" />
       </ul>
     </aside>
   );

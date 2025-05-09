@@ -7,7 +7,9 @@ const ExampleComponent:FC = () => {
 
     // const llamada = Service.useCases('getComercesById',{
     //     signal:signal,
-    //     endPointData:{id:'1234'},
+    //     endPointData:{
+    // id:'1234'
+    // },
     //     token:'ey....'
     //     }
     // ).then(res=>{

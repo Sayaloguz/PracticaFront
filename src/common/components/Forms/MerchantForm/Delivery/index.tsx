@@ -4,12 +4,20 @@ import { FC } from "react";
 import InputFloatingLabel from "../../InputFloatingLabel";
 import { toast } from "react-toastify";
 
+// TODO: Mover a utils?
+interface Merchant {
+  id?: string;
+  name: string;
+  address: string;
+  merchantType: string;
+  gindexClient: string;
+}
 interface MerchantFormProps {
   action: string;
   onCancel?: () => void;
-  onSuccess?: (merchant: any) => void;
+  onSuccess?: (merchant: Merchant) => void;
   initialData?: {
-    id?: string;
+    id: string;
     name: string;
     address: string;
     merchantType: string;
@@ -17,7 +25,12 @@ interface MerchantFormProps {
   };
 }
 
-const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, initialData }) => {
+const MerchantForm: FC<MerchantFormProps> = ({
+  action,
+  onCancel,
+  onSuccess,
+  initialData,
+}) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -36,27 +49,26 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, init
     }
 
     try {
-      Service.useCases(action, payload);
+      await Service.useCases(action, payload);
 
-      
-      toast.success(action === "createMerchant" ? "Merchant creado con éxito" : "Merchant actualizado con éxito", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }
-      )
-
+      toast.success(
+        action === "createMerchant"
+          ? "Merchant creado con éxito"
+          : "Merchant actualizado con éxito",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
 
       if (onSuccess) onSuccess(payload.endPointData);
-
-
     } catch (error) {
-
       toast.error("Error al procesar la solicitud", {
         position: "top-right",
         autoClose: 5000,
@@ -67,9 +79,8 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, init
         progress: undefined,
         theme: "light",
       });
-      
-      console.log("Error al procesar la solicitud", error);
 
+      console.log("Error al procesar la solicitud", error);
     }
   };
 
@@ -87,7 +98,7 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, init
         required={true}
         defaultValue={initialData?.address || ""}
       />
-      
+
       <InputFloatingLabel
         id="gindexClient"
         label="ID del cliente"
@@ -95,21 +106,24 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, init
         defaultValue={initialData?.gindexClient || ""}
       />
 
-{/* Cambiar esto para que obtenga los valores de forma localizada y hacer la normalización de datos donde corresponde, además de tomar bien el valor por defecto*/}
-    <select
-      id="merchantType"
-      name="merchantType"
-      className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 mb-4"
-      defaultValue={initialData?.merchantType || ""}
-      required
-    >
-      <option value="">Seleccione un tipo</option>
-      <option value="MERCHANT_TYPE_FINANCIAL_SERVICES">Financial Services</option>
-      <option value="MERCHANT_TYPE_PERSONAL_SERVICES">Personal Services</option>
-    </select>
+      {/* Cambiar esto para que obtenga los valores de forma localizada y hacer la normalización de datos donde corresponde, además de tomar bien el valor por defecto*/}
+      <select
+        id="merchantType"
+        name="merchantType"
+        className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 mb-4"
+        defaultValue={initialData?.merchantType || ""}
+        required
+      >
+        <option value="">Seleccione un tipo</option>
+        <option value="MERCHANT_TYPE_FINANCIAL_SERVICES">
+          Financial Services
+        </option>
+        <option value="MERCHANT_TYPE_PERSONAL_SERVICES">
+          Personal Services
+        </option>
+      </select>
 
       {onCancel && (
-
         <button
           type="button"
           onClick={onCancel}
@@ -117,19 +131,14 @@ const MerchantForm: FC<MerchantFormProps> = ({ action, onCancel, onSuccess, init
         >
           Cancelar
         </button>
-
       )}
-
 
       <button
         type="submit"
         className="py-2 px-4 bg-red-600 text-white rounded-md hover:bg-red-700"
       >
-      
         {action === "updateMerchant" ? "Actualizar merchant" : "Crear merchant"}
-      
       </button>
-
     </form>
   );
 };
