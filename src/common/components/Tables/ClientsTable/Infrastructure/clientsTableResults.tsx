@@ -12,7 +12,6 @@ export async function ClientResults({
   const endPointData =
     query.length > 0 ? { endPointData: { name: query } } : {};
 
-  // TODO: Cambiar esto a infrastructure, CREO que hecho
   const response = await Service.useCases(action, endPointData);
   const data = Array.isArray(response) ? response : response?.data || [];
 

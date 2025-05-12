@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import Search from "@/common/components/Search/Delivery";
 import { MerchantsTableSkeleton } from "@/common/components/Skeletons/MerchantsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
-import { MerchantResults } from "./infrastructure/functions";
 import IconButton from "@/common/components/Buttons/IconButton/Delivery";
 import { Breadcrumb } from "antd";
 import Link from "next/link";
+import { MerchantResults } from "@/common/components/Tables/MerchantsTable/Infrastructure/merchantsTableResults";
 
 export default async function MerchantsPage({
   searchParams,

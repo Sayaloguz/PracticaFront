@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import Search from "@/common/components/Search/Delivery";
 import { ClientsTableSkeleton } from "@/common/components/Skeletons/ClientsTableSkeleton";
 import MainTitle from "@/common/components/Titles/MainTitle";
-import { ClientResults } from "./infrastructure/functions";
 import IconButton from "@/common/components/Buttons/IconButton/Delivery";
 import { Breadcrumb } from "antd";
 import Link from "next/link";
+import { ClientResults } from "@/common/components/Tables/ClientsTable/Infrastructure/clientsTableResults";
 
 export default function ClientsPage({
   searchParams,

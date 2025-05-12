@@ -12,7 +12,6 @@ const ConfirmModalAntd: FC<ConfirmModalAntdProps> = ({
   return (
     <Modal title={title} open={open} onCancel={onCancel} footer={null} centered>
       <div className="text-center">
-        {/* TODO: Sustituir luego por un icono componente por coherencia con el resto de la aplicación */}
         <svg
           className="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto"
           aria-hidden="true"
