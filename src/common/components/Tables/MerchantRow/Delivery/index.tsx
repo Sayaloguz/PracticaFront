@@ -5,31 +5,9 @@ import Icon from "../../../Icon/Delivery";
 import ConfirmModalAntd from "../../../Modals/ConfirmModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
-import Service from "@/service/src";
+//import Service from "@/service/src";
 import { MerchantRowProps } from "./interface";
-
-// TODO: Sacarlo a un componente servidor
-async function handleDelete({
-  merchantId,
-  onDeleted,
-}: {
-  merchantId: string;
-  onDeleted: (id: string) => void;
-}) {
-  try {
-    await Service.useCases("deleteMerchant", {
-      endPointData: { id: merchantId },
-    });
-    onDeleted(merchantId);
-
-    return {
-      success: true,
-    };
-  } catch (error) {
-    console.error("Error al eliminar merchant:", error);
-    return { success: false, message: String(error) };
-  }
-}
+import { handleDelete } from "../Infrastructure/handleActions";
 
 const MerchantRow = ({
   merchant,
@@ -74,7 +52,7 @@ const MerchantRow = ({
           open={showConfirmModal}
           onConfirm={async () => {
             const result = await handleDelete({
-              merchantId: merchant.id,
+              merchantId: merchant.id || "", // Damos la opción de cadena vacía para evitar un warning de ts
               onDeleted,
             });
             setShowConfirmModal(false);

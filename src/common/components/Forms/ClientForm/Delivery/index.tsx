@@ -14,7 +14,6 @@ const ClientForm: FC<ClientFormProps> = ({
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // TODO: Ver hook de formularios y ver antd
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const payload = {
       endPointData: {
@@ -122,8 +121,6 @@ const ClientForm: FC<ClientFormProps> = ({
   );
 };
 export default ClientForm;
-
-// TODO: Sustituir formulario tradicional por uso de la librería React Hook Form
 
 /* 
 

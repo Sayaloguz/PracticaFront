@@ -79,7 +79,7 @@ footer {
   overflow-y: auto;
 }
 
-/* Elimina el fondo de autocompletado en todos los navegadores */
+/* Elimina el fondo de autocompletado en los navegadores */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

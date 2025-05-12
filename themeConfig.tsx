@@ -6,6 +6,15 @@ const themeConfig: ThemeConfig = {
     borderRadius: 6,
     colorText: "#333",
   },
+  components: {
+    Breadcrumb: {
+      itemColor: "#ef4444",
+      lastItemColor: "#333",
+      separatorColor: "#333",
+      linkHoverColor: "#ef4444",
+      separatorMargin: 10,
+    },
+  },
 };
 
 export default themeConfig;

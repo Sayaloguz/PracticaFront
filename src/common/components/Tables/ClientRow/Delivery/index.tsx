@@ -5,30 +5,8 @@ import Icon from "../../../Icon/Delivery";
 import ConfirmModalAntd from "../../../Modals/ConfirmModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
-import Service from "@/service/src";
 import { ClientRowProps } from "./interface";
-
-async function handleDelete({
-  clientId,
-  onDeleted,
-}: {
-  clientId: string;
-  onDeleted: (id: string) => void;
-}) {
-  try {
-    await Service.useCases("deleteClient", {
-      endPointData: { id: clientId },
-    });
-    onDeleted(clientId);
-
-    return {
-      success: true,
-    };
-  } catch (error) {
-    console.error("Error al eliminar cliente:", error);
-    return { success: false, message: String(error) };
-  }
-}
+import { handleDelete } from "../Infrastructure/handleActions";
 
 const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -79,7 +57,7 @@ const ClientRow = ({ client, isEven, onDeleted, onUpdate }: ClientRowProps) => {
           open={showConfirmModal}
           onConfirm={async () => {
             const result = await handleDelete({
-              clientId: client.id,
+              clientId: client.id || "",
               onDeleted,
             });
             setShowConfirmModal(false);

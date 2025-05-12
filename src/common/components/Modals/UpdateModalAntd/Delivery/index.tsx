@@ -1,5 +1,4 @@
 import { Modal } from "antd";
-import ClientForm from "@/common/components/Forms/ClientForm/Delivery";
 import { FC } from "react";
 import { UpdateModalAntdProps } from "./interface";
 import MerchantFormAntd from "@/common/components/Forms/MerchantFormAntd/Delivery";
