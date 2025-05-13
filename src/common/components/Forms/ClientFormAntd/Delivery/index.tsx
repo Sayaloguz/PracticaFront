@@ -5,7 +5,7 @@ import { Form, Button } from "antd";
 import Service from "@/service/src";
 import { useForm } from "antd/es/form/Form";
 import { toast } from "react-toastify";
-import AntdFloatingInput from "../../InputFloatingLabel/InputFloatingLabel";
+import InputUnderline from "../../Inputs/InputUnderline";
 
 const ClientFormAntd: FC<ClientFormAntdProps> = ({
   action,
@@ -57,10 +57,20 @@ const ClientFormAntd: FC<ClientFormAntdProps> = ({
         progress: undefined,
         theme: "light",
       });
-
       console.error("Error al procesar la solicitud", error);
     }
   };
+
+  /*
+  useEffect(() => {
+    form.setFieldsValue({
+      name: initialData?.name || "",
+      surname: initialData?.surname || "",
+      cifNifNie: initialData?.cifNifNie || "",
+      phone: initialData?.phone || "",
+      email: initialData?.email || "",
+    });
+  }, []);*/
 
   return (
     <Form
@@ -75,49 +85,45 @@ const ClientFormAntd: FC<ClientFormAntdProps> = ({
         email: initialData?.email || "",
       }}
     >
-      <AntdFloatingInput
+      <Form.Item
         name="name"
+        rules={[{ required: true, message: "Por favor ingrese el nombre" }]}
         label="Nombre"
-        formItemProps={{
-          rules: [{ required: true, message: "Por favor ingrese el nombre" }],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="surname"
+        rules={[{ required: true, message: "Por favor ingrese el apellido" }]}
         label="Apellido"
-        formItemProps={{
-          rules: [{ required: true, message: "Ingrese el apellido" }],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="cifNifNie"
+        rules={[{ required: true, message: "Por favor ingrese CIF/NIF/NIE" }]}
         label="Documento de identidad (CIF/NIF/NIE)"
-        formItemProps={{
-          rules: [{ required: true, message: "Ingrese su CIF/NIF/NIE" }],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="phone"
+        rules={[{ required: true, message: "Por favor ingrese el teléfono" }]}
         label="Teléfono"
-        formItemProps={{
-          rules: [
-            { required: true, message: "Introduzca el teléfono de contacto" },
-          ],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="email"
+        rules={[{ required: true, message: "Por favor ingrese el correo" }]}
         label="Email"
-        formItemProps={{
-          rules: [
-            { required: true, message: "Introduzca el email de contacto" },
-          ],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
       <Form.Item>
         {onCancel && (

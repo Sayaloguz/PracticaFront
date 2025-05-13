@@ -4,8 +4,6 @@ import { UpdateModalAntdProps } from "./interface";
 import MerchantFormAntd from "@/common/components/Forms/MerchantFormAntd/Delivery";
 import ClientFormAntd from "@/common/components/Forms/ClientFormAntd/Delivery";
 
-// Cliente | Merchant
-
 const UpdateModalAntd: FC<UpdateModalAntdProps> = ({
   title,
   action,

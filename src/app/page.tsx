@@ -10,7 +10,7 @@ export default function Home() {
         <MainTitle title="Bienvenido a la página principal" />
 
         <BigDecorativeImage
-          src={officeImage}
+          src={officeImage.src}
           alt="Personas en una oficina trabajando con ordenadores"
         />
 

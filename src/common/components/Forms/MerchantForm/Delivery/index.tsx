@@ -1,7 +1,7 @@
 "use client";
 import Service from "@/service/src";
 import { FC } from "react";
-import InputFloatingLabel from "../../InputFloatingLabel/InputFloatingLabel";
+import InputFloatingLabel from "../../InputFloatingLabel";
 import { toast } from "react-toastify";
 import { MerchantFormProps } from "./interface";
 

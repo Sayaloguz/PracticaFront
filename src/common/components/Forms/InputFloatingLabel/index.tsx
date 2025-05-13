@@ -1,24 +1,46 @@
 import React, { FC } from "react";
+import { Input, InputProps } from "antd";
+
+const InputUnderline: FC<InputProps> = (props) => {
+  return (
+    <Input
+      className="hover:bg-transparent text-base focus:bg-transparent bg-transparent block py-2.5 px-0 w-full text-gray-900 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
+      {...props}
+    ></Input>
+  );
+};
+
+export default InputUnderline;
+
+// Ya no se usa, pero lo dejo por si acaso
+/*
+import React, { FC } from "react";
 import { Input, InputProps, Form } from "antd";
 import { FormItemProps } from "antd/es/form";
 
 interface AntDFloatingInputProps extends InputProps {
+  name: string;
   label: string;
-  formItemProps?: FormItemProps;
+  formItemProps?: Omit<FormItemProps, "name">; // Excluimos name de formItemProps
 }
 
 const AntdFloatingInput: FC<AntDFloatingInputProps> = ({
+  name,
   label,
   formItemProps,
   ...inputProps
 }) => {
   return (
-    <Form.Item {...formItemProps} style={{ marginBottom: 24 }}>
+    <Form.Item
+      name={name} // Esto es lo más importante
+      {...formItemProps}
+      style={{ marginBottom: 24 }}
+    >
       <div className="relative z-0 w-full group">
         <Input
           {...inputProps}
           placeholder=" "
-          className="hover:bg-transparent focus:bg-transparent bg-transparent block py-2.5 px-0 w-full text-sm text-gray-900  border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
+          className="hover:bg-transparent focus:bg-transparent bg-transparent block py-2.5 px-0 w-full text-sm text-gray-900 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
         />
         <label
           htmlFor={inputProps.id}
@@ -33,3 +55,4 @@ const AntdFloatingInput: FC<AntDFloatingInputProps> = ({
 };
 
 export default AntdFloatingInput;
+*/

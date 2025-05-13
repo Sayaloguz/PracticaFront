@@ -5,7 +5,7 @@ import { Form, Select, Button } from "antd";
 import Service from "@/service/src";
 import { useForm } from "antd/es/form/Form";
 import { toast } from "react-toastify";
-import AntdFloatingInput from "../../InputFloatingLabel/InputFloatingLabel";
+import InputUnderline from "../../Inputs/InputUnderline";
 
 const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
   action,
@@ -45,6 +45,9 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
         }
       );
 
+      payload.endPointData.merchantType =
+        reverseMerchantTypeMap[payload.endPointData.merchantType];
+
       if (onSuccess) onSuccess(payload.endPointData);
     } catch (error) {
       toast.error("Error al procesar la solicitud", {
@@ -62,6 +65,18 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
     }
   };
 
+  console.log("INITIAL DATA: " + initialData?.merchantType);
+
+  const merchantTypeMap: Record<string, string> = {
+    "Personal Services": "MERCHANT_TYPE_PERSONAL_SERVICES",
+    "Financial Services": "MERCHANT_TYPE_FINANCIAL_SERVICES",
+  };
+
+  const reverseMerchantTypeMap: Record<string, string> = {
+    MERCHANT_TYPE_PERSONAL_SERVICES: "Personal Services",
+    MERCHANT_TYPE_FINANCIAL_SERVICES: "Financial Services",
+  };
+
   return (
     <Form
       form={form}
@@ -70,37 +85,35 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
       initialValues={{
         name: initialData?.name || "",
         address: initialData?.address || "",
-        merchantType: initialData?.merchantType || "",
+        merchantType: merchantTypeMap[initialData?.merchantType || ""],
         gindexClient: initialData?.gindexClient || "",
       }}
     >
-      <AntdFloatingInput
+      <Form.Item
         name="name"
+        rules={[{ required: true, message: "Por favor ingrese el nombre" }]}
         label="Nombre"
-        formItemProps={{
-          rules: [{ required: true, message: "Por favor ingrese el nombre" }],
-        }}
-      />
+      >
+        <InputUnderline placeholder="Ingrese el nombre" />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="address"
+        rules={[{ required: true, message: "Por favor ingrese la dirección" }]}
         label="Dirección"
-        formItemProps={{
-          rules: [
-            { required: true, message: "Por favor ingrese la dirección" },
-          ],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
-      <AntdFloatingInput
+      <Form.Item
         name="gindexClient"
+        rules={[
+          { required: true, message: "Por favor ingrese el ID del cliente" },
+        ]}
         label="ID del cliente"
-        formItemProps={{
-          rules: [
-            { required: true, message: "Por favor ingrese el ID del cliente" },
-          ],
-        }}
-      />
+      >
+        <InputUnderline />
+      </Form.Item>
 
       <Form.Item
         name="merchantType"

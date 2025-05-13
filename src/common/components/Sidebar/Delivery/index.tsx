@@ -10,7 +10,7 @@ export default function Sidebar() {
     <aside className="sidebar h-full bg-gray-100">
       <Link href="/">
         <Image
-          src={CNN}
+          src={CNN.src}
           alt="prueba"
           width={200}
           height={200}

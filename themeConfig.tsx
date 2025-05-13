@@ -14,6 +14,9 @@ const themeConfig: ThemeConfig = {
       linkHoverColor: "#ef4444",
       separatorMargin: 10,
     },
+    Form: {
+      fontSize: 15,
+    },
   },
 };
 
