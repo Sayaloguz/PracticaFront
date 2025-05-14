@@ -2,10 +2,14 @@
 import { FC } from "react";
 import { MerchantFormAntdProps } from "./interface";
 import { Form, Select, Button } from "antd";
-import Service from "@/service/src";
 import { useForm } from "antd/es/form/Form";
 import { toast } from "react-toastify";
 import InputUnderline from "../../Inputs/InputUnderline";
+import {
+  merchantTypeMap,
+  reverseMerchantTypeMap,
+} from "../Infrastructure/merchantFormFunctions";
+import { funcionUseCases } from "@/common/utils/functionUseCases";
 
 const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
   action,
@@ -22,12 +26,16 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
       },
     };
 
+    payload.endPointData.merchantType = merchantTypeMap(
+      payload.endPointData.merchantType
+    );
+
     if (initialData?.id) {
       payload.endPointData.id = initialData.id;
     }
 
     try {
-      await Service.useCases(action, payload);
+      await funcionUseCases(action, payload);
 
       toast.success(
         action === "createMerchant"
@@ -45,8 +53,9 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
         }
       );
 
-      payload.endPointData.merchantType =
-        reverseMerchantTypeMap[payload.endPointData.merchantType];
+      payload.endPointData.merchantType = reverseMerchantTypeMap(
+        payload.endPointData.merchantType
+      );
 
       if (onSuccess) onSuccess(payload.endPointData);
     } catch (error) {
@@ -65,18 +74,6 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
     }
   };
 
-  console.log("INITIAL DATA: " + initialData?.merchantType);
-
-  const merchantTypeMap: Record<string, string> = {
-    "Personal Services": "MERCHANT_TYPE_PERSONAL_SERVICES",
-    "Financial Services": "MERCHANT_TYPE_FINANCIAL_SERVICES",
-  };
-
-  const reverseMerchantTypeMap: Record<string, string> = {
-    MERCHANT_TYPE_PERSONAL_SERVICES: "Personal Services",
-    MERCHANT_TYPE_FINANCIAL_SERVICES: "Financial Services",
-  };
-
   return (
     <Form
       form={form}
@@ -85,7 +82,7 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
       initialValues={{
         name: initialData?.name || "",
         address: initialData?.address || "",
-        merchantType: merchantTypeMap[initialData?.merchantType || ""],
+        merchantType: initialData?.merchantType || "",
         gindexClient: initialData?.gindexClient || "",
       }}
     >
@@ -121,10 +118,10 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
         rules={[{ required: true, message: "Por favor seleccione un tipo" }]}
       >
         <Select placeholder="Seleccione el tipo de comercio">
-          <Select.Option value="MERCHANT_TYPE_FINANCIAL_SERVICES">
+          <Select.Option value="Financial Services">
             Financial Services
           </Select.Option>
-          <Select.Option value="MERCHANT_TYPE_PERSONAL_SERVICES">
+          <Select.Option value="Personal Services">
             Personal Services
           </Select.Option>
         </Select>

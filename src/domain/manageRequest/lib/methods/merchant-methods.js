@@ -1,8 +1,12 @@
+import { normalize } from "../../../manageNormalize";
+
 export const MERCHANT_METHODS = {
   // getMerchants, getMerchantById, getMerchantsByName, deleteMerchant, updateMerchant, createMerchant
 
   getMerchants: (response) => {
-    return response;
+    const normalizedData = normalize(response.data, "getMerchant");
+
+    return { data: normalizedData };
   },
   getMerchantById: (response) => {
     return response;
@@ -19,6 +23,4 @@ export const MERCHANT_METHODS = {
   createMerchant: (response) => {
     return response;
   },
-
-  // Métodos de normalización de datos
 };

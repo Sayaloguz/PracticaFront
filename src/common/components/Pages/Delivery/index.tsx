@@ -6,6 +6,7 @@ export async function ClientResults({
 }: {
   searchParams: { query?: string };
 }) {
+  // TODO: Hacer un select para nombre/cifNifNie
   const query = searchParams?.query || "";
 
   const action = query.length > 0 ? "getClientsByName" : "getClients";
@@ -13,6 +14,7 @@ export async function ClientResults({
     query.length > 0 ? { endPointData: { name: query } } : {};
 
   const response = await funcionUseCases(action, endPointData);
+
   const data = Array.isArray(response) ? response : response?.data || [];
 
   return <ClientsTable tableData={data} />;

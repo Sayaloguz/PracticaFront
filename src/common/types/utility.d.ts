@@ -12,6 +12,7 @@ declare namespace Utility {
   };
 
   type Merchant = {
+    key: string;
     id?: string;
     name: string;
     address: string;

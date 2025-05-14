@@ -1,4 +1,4 @@
-import useCases from './application';
+import useCases from "./application";
 
 const useCasesJson = useCases as Utility.JSONValue;
 

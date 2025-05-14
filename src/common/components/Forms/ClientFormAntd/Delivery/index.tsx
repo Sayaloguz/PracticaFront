@@ -2,10 +2,10 @@
 import { FC } from "react";
 import { ClientFormAntdProps } from "./interface";
 import { Form, Button } from "antd";
-import Service from "@/service/src";
 import { useForm } from "antd/es/form/Form";
 import { toast } from "react-toastify";
 import InputUnderline from "../../Inputs/InputUnderline";
+import { funcionUseCases } from "@/common/utils/functionUseCases";
 
 const ClientFormAntd: FC<ClientFormAntdProps> = ({
   action,
@@ -27,7 +27,7 @@ const ClientFormAntd: FC<ClientFormAntdProps> = ({
     }
 
     try {
-      await Service.useCases(action, payload);
+      await funcionUseCases(action, payload);
 
       toast.success(
         action === "createClient"

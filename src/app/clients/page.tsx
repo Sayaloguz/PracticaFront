@@ -28,7 +28,7 @@ export default function ClientsPage({
       <MainTitle title="Clientes" />
 
       <div className="flex items-center justify-between w-full px-6">
-        <Search placeholder="Buscar cliente" />
+        <Search placeholder="Buscar cliente por nombre" />
         <IconButton
           title="Añadir cliente"
           href="/clients/create"

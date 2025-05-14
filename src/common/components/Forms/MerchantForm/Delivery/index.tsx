@@ -1,9 +1,9 @@
 "use client";
-import Service from "@/service/src";
 import { FC } from "react";
-import InputFloatingLabel from "../../InputFloatingLabel";
+import InputFloatingLabel ";
 import { toast } from "react-toastify";
 import { MerchantFormProps } from "./interface";
+import { funcionUseCases } from "@/common/utils/functionUseCases";
 
 const MerchantForm: FC<MerchantFormProps> = ({
   action,
@@ -29,7 +29,7 @@ const MerchantForm: FC<MerchantFormProps> = ({
     }
 
     try {
-      await Service.useCases(action, payload);
+      await funcionUseCases(action, payload);
 
       toast.success(
         action === "createMerchant"

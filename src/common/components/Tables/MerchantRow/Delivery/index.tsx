@@ -5,7 +5,6 @@ import Icon from "../../../Icon/Delivery";
 import ConfirmModalAntd from "../../../Modals/ConfirmModalAntd/Delivery";
 import UpdateModalAntd from "../../../Modals/UpdateModalAntd/Delivery";
 import { toast } from "react-toastify";
-//import Service from "@/service/src";
 import { MerchantRowProps } from "./interface";
 import { handleDelete } from "../Infrastructure/handleActions";
 
