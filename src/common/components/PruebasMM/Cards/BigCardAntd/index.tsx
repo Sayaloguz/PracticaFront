@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Avatar, Card, Image, Tag } from "antd";
-import { FC } from "react";
 import {
   DeleteOutlined,
   SettingOutlined,
@@ -10,7 +9,8 @@ import {
 } from "@ant-design/icons";
 import Meta from "antd/es/card/Meta";
 import { UserGroupIcon } from "../../CustomIconsAntd";
-import ModalJam from "../../ModalJamSettings/Delivery";
+import ModalJam from "../../ModalsMM/ModalJamSettings/Delivery";
+import ConfirmModalAntd from "../../ModalsMM/ConfirmModalAntd/Delivery";
 
 interface BigCardAntdProps {
   game: string;
@@ -24,9 +24,10 @@ interface BigCardAntdProps {
   currentPlayers?: number;
   jamData: any;
   onUpdateJam: (newJamData: any) => void;
+  onDeleteJam?: (id: string) => void;
 }
 
-const BigCardAntd: FC<BigCardAntdProps> = ({
+const BigCardAntd: React.FC<BigCardAntdProps> = ({
   game,
   alt,
   src,
@@ -38,19 +39,14 @@ const BigCardAntd: FC<BigCardAntdProps> = ({
   currentPlayers,
   jamData,
   onUpdateJam,
-}: BigCardAntdProps) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  onDeleteJam,
+}) => {
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
+  const [isUserModalVisible, setIsUserModalVisible] = useState(false);
 
   const handleUpdateJam = (newJamData: any) => {
-    onUpdateJam(newJamData); // Llamamos a la función para actualizar los datos
+    onUpdateJam(newJamData);
   };
 
   return (
@@ -63,9 +59,13 @@ const BigCardAntd: FC<BigCardAntdProps> = ({
           <SettingOutlined
             key="settings"
             style={{ fontSize: "20px" }}
-            onClick={showModal}
+            onClick={() => setIsEditModalVisible(true)}
           />,
-          <DeleteOutlined key="delete" style={{ fontSize: "20px" }} />,
+          <DeleteOutlined
+            key="delete"
+            style={{ fontSize: "20px" }}
+            onClick={() => setIsConfirmVisible(true)}
+          />,
           <UserGroupIcon key="group" />,
         ]}
       >
@@ -91,13 +91,23 @@ const BigCardAntd: FC<BigCardAntdProps> = ({
         />
       </Card>
 
-      {/* Modal para editar la jam */}
       <ModalJam
-        isVisible={isModalVisible}
-        onCancel={handleCancel}
+        isVisible={isEditModalVisible}
+        onCancel={() => setIsEditModalVisible(false)}
         onUpdate={handleUpdateJam}
-        currentPlayers={currentPlayers}
+        currentPlayers={currentPlayers || 0}
         jamData={jamData}
+      />
+
+      <ConfirmModalAntd
+        title="¿Eliminar Jam?"
+        message="Esta acción no se puede deshacer. ¿Estás seguro?"
+        open={isConfirmVisible}
+        onCancel={() => setIsConfirmVisible(false)}
+        onConfirm={() => {
+          onDeleteJam?.(jamData.id);
+          setIsConfirmVisible(false);
+        }}
       />
     </>
   );

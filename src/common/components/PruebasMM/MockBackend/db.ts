@@ -20,8 +20,8 @@ type Jam = {
   currentPlayers: number;
   description: string;
   status: string;
-  date: string; // formato: "YYYY-MM-DD"
-  time: string; // formato: "HH:mm"
+  date: string;
+  time: string;
   user?: User;
   game?: Game;
 };
