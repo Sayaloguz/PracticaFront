@@ -10,20 +10,6 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 
-interface ModalJamProps {
-  isVisible: boolean;
-  onCancel: () => void;
-  onUpdate: (jam: any) => void;
-  currentPlayers: number;
-  jamData: {
-    // AQUÍ CURRENPLAYERS
-    date?: string;
-    time?: string;
-    maxPlayers?: number;
-    [key: string]: any;
-  };
-}
-
 const ModalJam: React.FC<ModalJamProps> = ({
   isVisible,
   onCancel,

@@ -12,6 +12,12 @@ import { UserGroupIcon } from "../../CustomIconsAntd";
 import ModalJam from "../../ModalsMM/ModalJamSettings/Delivery";
 import ConfirmModalAntd from "../../ModalsMM/ConfirmModalAntd/Delivery";
 
+interface User {
+  id: string;
+  username: string;
+  avatar: string;
+}
+
 interface BigCardAntdProps {
   game: string;
   alt: string;
@@ -21,7 +27,7 @@ interface BigCardAntdProps {
   date?: string;
   time?: string;
   maxPlayers?: number;
-  currentPlayers?: number;
+  currentPlayers?: User[];
   jamData: any;
   onUpdateJam: (newJamData: any) => void;
   onDeleteJam?: (id: string) => void;
@@ -36,14 +42,13 @@ const BigCardAntd: React.FC<BigCardAntdProps> = ({
   date,
   time,
   maxPlayers,
-  currentPlayers,
+  currentPlayers = [],
   jamData,
   onUpdateJam,
   onDeleteJam,
 }) => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
-  const [isUserModalVisible, setIsUserModalVisible] = useState(false);
 
   const handleUpdateJam = (newJamData: any) => {
     onUpdateJam(newJamData);
@@ -81,11 +86,35 @@ const BigCardAntd: React.FC<BigCardAntdProps> = ({
                   <span>{`${date} a las ${time}`}</span>
                 </div>
               )}
-              {maxPlayers && currentPlayers && (
+              {maxPlayers && (
                 <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <Tag color="blue">{`${currentPlayers}/${maxPlayers} jugadores`}</Tag>
+                  <Tag color="blue">{`${currentPlayers.length}/${maxPlayers} jugadores`}</Tag>
                 </div>
               )}
+              {/*
+              {maxPlayers && currentPlayers && (
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                  <Tooltip
+                    title={
+                      <div className="flex space-x-2">
+                        {currentPlayers.map((player: any) => (
+                          <Avatar
+                            key={player.id}
+                            src={player.avatar}
+                            alt={player.username}
+                            size="small"
+                          />
+                        ))}
+                      </div>
+                    }
+                  >
+                    <Tag color="blue">
+                      {`${currentPlayers.length}/${maxPlayers} jugadores`}
+                    </Tag>
+                  </Tooltip>
+                </div>
+              )}
+              */}
             </div>
           }
         />
@@ -95,7 +124,7 @@ const BigCardAntd: React.FC<BigCardAntdProps> = ({
         isVisible={isEditModalVisible}
         onCancel={() => setIsEditModalVisible(false)}
         onUpdate={handleUpdateJam}
-        currentPlayers={currentPlayers || 0}
+        currentPlayers={currentPlayers.length}
         jamData={jamData}
       />
 

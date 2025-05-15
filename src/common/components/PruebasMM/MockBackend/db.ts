@@ -1,5 +1,3 @@
-// mockApi.ts
-
 type Game = {
   id: string;
   title: string;
@@ -17,7 +15,7 @@ type Jam = {
   userId: string;
   gameId: string;
   maxPlayers: number;
-  currentPlayers: number;
+  currentPlayers: User[];
   description: string;
   status: string;
   date: string;
@@ -72,7 +70,7 @@ export const getJamsByUser = (userId: string): Promise<Jam[]> => {
       userId: "user1",
       gameId: "game1",
       maxPlayers: 4,
-      currentPlayers: 2,
+      currentPlayers: [users[1], users[2]],
       description: "¡Buscando dos más para un 2v2 competitivo!",
       status: "en curso",
       date: "2025-05-18",
@@ -83,7 +81,7 @@ export const getJamsByUser = (userId: string): Promise<Jam[]> => {
       userId: "user1",
       gameId: "game2",
       maxPlayers: 5,
-      currentPlayers: 3,
+      currentPlayers: [users[2]],
       description: "Valorant chill, no ranked.",
       status: "en curso",
       date: "2025-05-19",
@@ -94,7 +92,7 @@ export const getJamsByUser = (userId: string): Promise<Jam[]> => {
       userId: "user1",
       gameId: "game3",
       maxPlayers: 10,
-      currentPlayers: 7,
+      currentPlayers: [users[1], users[2], users[0]],
       description: "Among Us con amigos, se permite voice chat.",
       status: "en curso",
       date: "2025-05-20",
@@ -102,18 +100,13 @@ export const getJamsByUser = (userId: string): Promise<Jam[]> => {
     },
   ];
 
-  // Simulamos una llamada a la API
-  const result: Jam[] = jams
-    .filter((j) => j.userId === userId)
-    .map((jam) => {
-      const user = users.find((u) => u.id === jam.userId);
-      const game = games.find((g) => g.id === jam.gameId);
-      return {
+  return Promise.resolve(
+    jams
+      .filter((j) => j.userId === userId)
+      .map((jam) => ({
         ...jam,
-        user,
-        game,
-      };
-    });
-
-  return Promise.resolve(result);
+        user: users.find((u) => u.id === jam.userId),
+        game: games.find((g) => g.id === jam.gameId),
+      }))
+  );
 };

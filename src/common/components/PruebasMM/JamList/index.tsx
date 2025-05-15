@@ -20,7 +20,7 @@ type Jam = {
   userId: string;
   gameId: string;
   maxPlayers: number;
-  currentPlayers: number;
+  currentPlayers: User[];
   description: string;
   status: string;
   date: string;
