@@ -29,7 +29,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         onChange={(event) => handleSearch(event.target.value)}
         type="text"
         id="query"
-        className="block ml-4 mr-4 w-full md:w-1/2 rounded-md border-0 py-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600"
+        className="block ml-4 mr-4 w-full rounded-md border-0 py-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600"
         placeholder={placeholder}
         defaultValue={searchParams.get("query")?.toString()}
       />

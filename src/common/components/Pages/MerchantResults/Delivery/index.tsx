@@ -1,15 +1,15 @@
-import ClientsTable from "@/common/components/Tables/ClientsTable/Delivery";
+import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import { funcionUseCases } from "@/common/utils/functionUseCases";
 
-export async function ClientResults({
+export async function MerchantResults({
   searchParams,
 }: {
   searchParams: { query?: string };
 }) {
-  // TODO: Hacer un select para nombre/cifNifNie
+  // TODO: Hacer un select para nombre/cliente
   const query = searchParams?.query || "";
 
-  const action = query.length > 0 ? "getClientsByName" : "getClients";
+  const action = query.length > 0 ? "getMerchantsByName" : "getMerchants";
   const endPointData =
     query.length > 0 ? { endPointData: { name: query } } : {};
 
@@ -17,5 +17,5 @@ export async function ClientResults({
 
   const data = Array.isArray(response) ? response : response?.data || [];
 
-  return <ClientsTable tableData={data} />;
+  return <MerchantsTable tableData={data} />;
 }

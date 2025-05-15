@@ -26,10 +26,6 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
       },
     };
 
-    payload.endPointData.merchantType = merchantTypeMap(
-      payload.endPointData.merchantType
-    );
-
     if (initialData?.id) {
       payload.endPointData.id = initialData.id;
     }
@@ -82,7 +78,7 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
       initialValues={{
         name: initialData?.name || "",
         address: initialData?.address || "",
-        merchantType: initialData?.merchantType || "",
+        merchantType: merchantTypeMap(initialData?.merchantType || ""),
         gindexClient: initialData?.gindexClient || "",
       }}
     >
@@ -118,10 +114,10 @@ const MerchantFormAntd: FC<MerchantFormAntdProps> = ({
         rules={[{ required: true, message: "Por favor seleccione un tipo" }]}
       >
         <Select placeholder="Seleccione el tipo de comercio">
-          <Select.Option value="Financial Services">
+          <Select.Option value="MERCHANT_TYPE_FINANCIAL_SERVICES">
             Financial Services
           </Select.Option>
-          <Select.Option value="Personal Services">
+          <Select.Option value="MERCHANT_TYPE_PERSONAL_SERVICES">
             Personal Services
           </Select.Option>
         </Select>

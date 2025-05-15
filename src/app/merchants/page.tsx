@@ -5,7 +5,7 @@ import MainTitle from "@/common/components/Titles/MainTitle";
 import IconButton from "@/common/components/Buttons/IconButton/Delivery";
 import { Breadcrumb } from "antd";
 import Link from "next/link";
-import { MerchantResults } from "@/common/components/Tables/MerchantsTable/Infrastructure/merchantsTableResults";
+import { MerchantResults } from "@/common/components/Pages/MerchantResults/Delivery";
 
 export default async function MerchantsPage({
   searchParams,

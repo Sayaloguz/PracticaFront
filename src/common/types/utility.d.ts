@@ -19,4 +19,9 @@ declare namespace Utility {
     merchantType: string;
     gindexClient: string;
   };
+
+  type SelectOption = {
+    value: string;
+    label: string;
+  };
 }

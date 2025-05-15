@@ -9,4 +9,23 @@ export const getMerchantDictionary = {
     delete [key];
     return response;
   },
+  merchantType: (key, value, responseBody) => {
+    const prefix = "MERCHANT_TYPE_";
+
+    if (!responseBody.merchantType.startsWith(prefix)) {
+      throw new Error("Invalid merchant type");
+    }
+
+    const merchantTypeNormalized = responseBody.merchantType
+      .substring(prefix.length)
+      .split("_")
+      .filter((word) => word)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+
+    const response = { merchantType: merchantTypeNormalized };
+
+    delete [key];
+    return response;
+  },
 };

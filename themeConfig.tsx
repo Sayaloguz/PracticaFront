@@ -17,6 +17,9 @@ const themeConfig: ThemeConfig = {
     Form: {
       fontSize: 15,
     },
+    Card: {
+      // Aquí puedes añadir configuraciones específicas si lo deseas
+    },
   },
 };
 

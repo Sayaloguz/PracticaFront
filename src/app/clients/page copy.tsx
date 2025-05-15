@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { Suspense } from "react";
 import Search from "@/common/components/Search/Delivery";
 import { ClientsTableSkeleton } from "@/common/components/Skeletons/ClientsTableSkeleton";
@@ -16,13 +13,6 @@ export default function ClientsPage({
 }: {
   searchParams?: { query?: string };
 }) {
-  const [searchField, setSearchField] = useState("name");
-
-  const selectOptions = [
-    { value: "name", label: "Nombre" },
-    { value: "cifNifNie", label: "CIF/NIF/NIE" },
-  ];
-
   return (
     <section>
       <Breadcrumb
@@ -38,14 +28,8 @@ export default function ClientsPage({
 
       <MainTitle title="Clientes" />
       <div className="flex items-center justify-between w-full px-6">
-        <div className="flex items-baseline">
-          <Search placeholder="Buscar cliente" />
-          <SelectAntd
-            value={searchField}
-            onChange={setSearchField}
-            options={selectOptions}
-          />
-        </div>
+        <Search placeholder="Buscar cliente por nombre" />
+        <SelectAntd />
 
         <IconButton
           title="Añadir cliente"
@@ -53,14 +37,8 @@ export default function ClientsPage({
           icon="addUser"
         />
       </div>
-      <Suspense
-        key={`${searchParams?.query}-${searchField}`}
-        fallback={<ClientsTableSkeleton />}
-      >
-        <ClientResults
-          searchParams={searchParams || {}}
-          searchField={searchField}
-        />
+      <Suspense key={searchParams?.query} fallback={<ClientsTableSkeleton />}>
+        <ClientResults searchParams={searchParams || {}} />
       </Suspense>
     </section>
   );
