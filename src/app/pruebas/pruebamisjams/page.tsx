@@ -3,7 +3,7 @@ import BigCardAntd from "@/common/components/PruebasMM/Cards/BigCardAntd";
 import Link from "next/link";
 import JamList from "@/common/components/PruebasMM/JamList";
 
-export default function MisJams() {
+export default function PagePruebasMisJams() {
   return (
     <div>
       <div className="flex flex-col items-center justify-center">

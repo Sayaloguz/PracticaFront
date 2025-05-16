@@ -2,7 +2,7 @@ import MainTitle from "@/common/components/Titles/MainTitle";
 import CardAntd from "@/common/components/PruebasMM/Cards/CardAntd";
 import Link from "next/link";
 
-export default function Home() {
+export default function PagePruebasHud() {
   return (
     <div>
       <div className="flex flex-col items-center justify-center">

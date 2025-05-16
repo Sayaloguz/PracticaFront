@@ -4,13 +4,14 @@ import CardAntd from "@/common/components/PruebasMM/Cards/CardAntd";
 import BigCardAntd from "@/common/components/PruebasMM/Cards/BigCardAntd";
 import Link from "next/link";
 
-export default function Home() {
+export default function PageHomePruebas() {
   return (
     <div>
       <div className="flex flex-col items-center justify-center">
         <MainTitle title="Página de pruebas" />
         <Link href="/pruebas/pruebahud">Hud</Link>
         <Link href="/pruebas/pruebamisjams">Mis jams</Link>
+        <Link href="/pruebas/pruebacrearjam">Prueba formulario</Link>
         <CardAntd
           game="Hola, prueba título"
           alt="Prueba de card"
