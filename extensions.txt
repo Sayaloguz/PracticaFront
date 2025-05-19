@@ -1,0 +1,17 @@
+aaron-bond.better-comments
+amazonwebservices.amazon-q-vscode
+bradlc.vscode-tailwindcss
+burkeholland.simple-react-snippets
+cardinal90.multi-cursor-case-preserve
+dbaeumer.vscode-eslint
+eamodio.gitlens
+esbenp.prettier-vscode
+github.copilot
+github.copilot-chat
+pkief.material-icon-theme
+ritwickdey.liveserver
+usernamehw.errorlens
+wallabyjs.console-ninja
+xabikos.javascriptsnippets
+yoavbls.pretty-ts-errors
+zhuangtongfa.material-theme

@@ -46,11 +46,11 @@ const getAllGames = (): Promise<Game[]> => {
 const FormCrearJam: FC = () => {
   const [mode, setMode] = useState("casual");
   const [voice, setVoice] = useState("text");
-  const [games, setGames] = useState<Game[]>([]); // ✅ Estado para juegos
+  const [games, setGames] = useState<Game[]>([]);
   const [form] = useForm();
 
   useEffect(() => {
-    getAllGames().then(setGames); // ✅ Obtener juegos al montar
+    getAllGames().then(setGames);
   }, []);
 
   const handleFinish = async (values: any) => {

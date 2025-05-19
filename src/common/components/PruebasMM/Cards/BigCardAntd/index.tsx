@@ -57,7 +57,7 @@ const BigCardAntd: React.FC<BigCardAntdProps> = ({
   return (
     <>
       <Card
-        className="transition-transform duration-200 hover:scale-105 my-8 mx-12"
+        className="transition-transform duration-200 hover:bg-slate-600 hover:scale-105 my-8 mx-12"
         style={{ width: 600 }}
         cover={<Image alt={alt} src={src} preview={false} />}
         actions={[
