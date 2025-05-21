@@ -1,41 +1,55 @@
 "use client";
-import SearchIcon from "../../Icon/SearchIcon";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 
-export default function Search({ placeholder }: { placeholder: string }) {
+import { useRouter, useSearchParams } from "next/navigation";
+import { Input, Select } from "antd";
+import { useState, useEffect } from "react";
+
+const { Option } = Select;
+
+const SearchMerchant = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams);
+  const initialQuery = searchParams.get("query") || "";
+  const initialField =
+    (searchParams.get("field") as "name" | "clientId") || "name";
 
-    if (term) {
-      params.set("query", term);
-    } else {
-      params.delete("query");
-    }
+  const [query, setQuery] = useState(initialQuery);
+  const [field, setField] = useState<"name" | "clientId">(initialField);
 
-    replace(`${pathname}?${params.toString()}`);
-  }, 600);
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      const params = new URLSearchParams();
+      if (query) params.set("query", query);
+      if (field) params.set("field", field);
+
+      router.push(`/merchants?${params.toString()}`);
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [query, field]);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0 ">
-      <label htmlFor="query" className="sr-only">
-        Search
-      </label>
-      <input
-        onChange={(event) => handleSearch(event.target.value)}
-        type="text"
-        id="query"
-        className="block ml-4 mr-4 w-full rounded-md border-0 py-2 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600"
-        placeholder={placeholder}
-        defaultValue={searchParams.get("query")?.toString()}
+    <div className="flex gap-4 w-full">
+      <Select
+        value={field}
+        onChange={(value) => setField(value as "name" | "clientId")}
+        style={{ width: 140 }}
+      >
+        <Option value="name">Nombre</Option>
+        <Option value="clientId">Client ID</Option>
+      </Select>
+
+      <Input
+        placeholder={`Buscar merchant por ${
+          field === "name" ? "nombre" : "Client ID"
+        }`}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        allowClear
       />
-      <div className="ml-3 pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <SearchIcon />
-      </div>
     </div>
   );
-}
+};
+
+export default SearchMerchant;

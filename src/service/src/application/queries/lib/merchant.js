@@ -1,88 +1,100 @@
-import manageRequest from '@/domain/manageRequest';
+import manageRequest from "@/domain/manageRequest";
 
 // getMerchants, getMerchantById, getMerchantsByName, deleteMerchant, updateMerchant, createMerchant
 const merchantUseCases = {
   getMerchants: (signal, values, token) => {
-    
     return manageRequest(
       signal,
-      'getMerchants',
+      "getMerchants",
       values,
-      'query',
-      'normal',
-      'get',
+      "query",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   getMerchantById: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getMerchantById',
+      "getMerchantById",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   getMerchantsByName: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getMerchantsByName',
+      "getMerchantsByName",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   deleteMerchant: (signal, values, token) => {
     return manageRequest(
       signal,
-      'deleteMerchant',
+      "deleteMerchant",
       values,
-      'normal',
-      'normal',
-      'delete',
+      "normal",
+      "normal",
+      "delete",
+      token,
+      undefined
+    );
+  },
+  getByClientId: (signal, values, token) => {
+    return manageRequest(
+      signal,
+      "getByClientId",
+      values,
+      "normal",
+      "normal",
+      "post",
       token,
       undefined,
+      {
+        "Content-Type": "application/json",
+      }
     );
   },
   updateMerchant: (signal, values, token) => {
     return manageRequest(
       signal,
-      'updateMerchant',
+      "updateMerchant",
       values,
-      'normal',
-      'normal',
-      'put',
+      "normal",
+      "normal",
+      "put",
       token,
       undefined,
       {
-        'Content-Type': 'application/json' 
-      },
+        "Content-Type": "application/json",
+      }
     );
   },
   createMerchant: (signal, values, token) => {
     return manageRequest(
       signal,
-      'createMerchant',
+      "createMerchant",
       values,
-      'normal',
-      'normal',
-      'post',
+      "normal",
+      "normal",
+      "post",
       token,
       undefined,
       {
-        'Content-Type': 'application/json' 
-      },
+        "Content-Type": "application/json",
+      }
     );
-  }
-
-
+  },
 };
 
 export default merchantUseCases;

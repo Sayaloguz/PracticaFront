@@ -1,20 +1,29 @@
 import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import { funcionUseCases } from "@/common/utils/functionUseCases";
 
-export async function MerchantResults({
+export default async function MerchantResults({
   searchParams,
+  searchField,
 }: {
   searchParams: { query?: string };
+  searchField: "name" | "clientId";
 }) {
-  // TODO: Hacer un select para nombre/cliente
-  const query = searchParams?.query || "";
+  const query = searchParams?.query?.trim().toLowerCase() || "";
 
-  const action = query.length > 0 ? "getMerchantsByName" : "getMerchants";
-  const endPointData =
-    query.length > 0 ? { endPointData: { name: query } } : {};
+  let action: string;
+  let endPointData: Record<string, any> = {};
+
+  if (!query) {
+    action = "getMerchants";
+  } else if (searchField === "name") {
+    action = "getMerchantsByName";
+    endPointData = { endPointData: { name: query } };
+  } else {
+    action = "getByClientId";
+    endPointData = { endPointData: { id: query } }; // o el nombre de parámetro que espere el backend
+  }
 
   const response = await funcionUseCases(action, endPointData);
-
   const data = Array.isArray(response) ? response : response?.data || [];
 
   return <MerchantsTable tableData={data} />;

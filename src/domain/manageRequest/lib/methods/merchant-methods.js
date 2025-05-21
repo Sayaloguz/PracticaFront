@@ -11,8 +11,15 @@ export const MERCHANT_METHODS = {
   getMerchantById: (response) => {
     return response;
   },
+  getByClientId: (response) => {
+    const normalizedData = normalize(response.data, "getByClientId");
+
+    return { data: normalizedData };
+  },
   getMerchantsByName: (response) => {
-    return response;
+    const normalizedData = normalize(response.data, "getMerchantsByName");
+
+    return { data: normalizedData };
   },
   deleteMerchant: (response) => {
     return response;
