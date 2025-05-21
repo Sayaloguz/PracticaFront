@@ -1,99 +1,97 @@
-import manageRequest from '@/domain/manageRequest';
-  // getClients, getClientById, getClientsByName, getClientByEmail, updateClient, deleteClient, createClient
-  const clientUseCases = {
+import manageRequest from "@/domain/manageRequest";
+// getClients, getClientById, getClientsByName, getClientByEmail, updateClient, deleteClient, createClient
+const clientUseCases = {
   getClients: (signal, values, token) => {
-    
     return manageRequest(
       signal,
-      'getClients',
+      "getClients",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
 
   getClientById: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getClientById',
+      "getClientById",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   getClientsByName: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getClientsByName',
+      "getClientsByName",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   getClientByEmail: (signal, values, token) => {
     return manageRequest(
       signal,
-      'getClientByEmail',
+      "getClientByEmail",
       values,
-      'normal',
-      'normal',
-      'get',
+      "normal",
+      "normal",
+      "get",
       token,
-      undefined,
+      undefined
     );
   },
   updateClient: (signal, values, token) => {
     return manageRequest(
       signal,
-      'updateClient',
+      "updateClient",
       values,
-      'normal',
-      'normal',
-      'put',
+      "normal",
+      "normal",
+      "put",
       token,
       undefined,
       {
-        'Content-Type': 'application/json' 
+        "Content-Type": "application/json",
       }
     );
   },
   deleteClient: (signal, values, token) => {
     return manageRequest(
       signal,
-      'deleteClient',
+      "deleteClient",
       values,
-      'normal',
-      'normal',
-      'delete',
+      "normal",
+      "normal",
+      "delete",
       token,
-      undefined,
+      undefined
     );
   },
   createClient: (signal, values, token) => {
     return manageRequest(
       signal,
-      'createClient',
+      "createClient",
       values,
-      'normal',
-      'normal',
-      'post',
+      "normal",
+      "normal",
+      "post",
       token,
       undefined,
       {
-        'Content-Type': 'application/json' 
-      },
+        "Content-Type": "application/json",
+      }
     );
-  }
-
+  },
 };
 
 export default clientUseCases;

@@ -6,11 +6,21 @@ export async function ClientResults({
   searchField,
 }: {
   searchParams: { query?: string };
-  searchField: "name" | "cifNifNie";
+  searchField: "name" | "email";
 }) {
-  const query = searchParams?.query || "";
+  const query = searchParams?.query?.trim().toLowerCase() || "";
 
-  const action = query.length > 0 ? "getClientsByName" : "getClients";
+  let action: string;
+
+  if (!query) {
+    action = "getClients"; // ✅ Acción por defecto
+  } else if (searchField === "name") {
+    action = "getClientsByName";
+  } else {
+    action = "getClientByEmail";
+  }
+
+  console.log("Usando acción:", action);
 
   const endPointData =
     query.length > 0 ? { endPointData: { [searchField]: query } } : {};

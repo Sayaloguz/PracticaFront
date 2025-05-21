@@ -1,4 +1,3 @@
-
 export const CLIENT_METHODS = {
   // getClients, getClientById, getClientsByName, updateClient, deleteClient, createClient
 
@@ -16,24 +15,24 @@ export const CLIENT_METHODS = {
         return value;
     
     */
-    return response
-    },
+    return response;
+  },
   getClientById: (response) => {
-    return response
-  }
-  ,
+    return response;
+  },
   getClientsByName: (response) => {
-    return response
+    return response;
+  },
+  getClientByEmail: (response) => {
+    return response;
   },
   updateClient: (response) => {
-    return response
+    return response;
   },
   deleteClient: (response) => {
-    return response
+    return response;
   },
   createClient: (response) => {
-    return response
-  }
-
-  
+    return response;
+  },
 };
