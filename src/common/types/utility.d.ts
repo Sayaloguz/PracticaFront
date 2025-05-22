@@ -24,4 +24,14 @@ declare namespace Utility {
     value: string;
     label: string;
   };
+
+  // Arreglos para evitar warnings de EsLint
+
+  type EmptyPayload = object;
+  type NamePayload = { endPointData: { name: string } };
+  type ClientIdPayload = { endPointData: { clientId: string } };
+
+  type EndPointDataType = EmptyPayload | NamePayload | ClientIdPayload;
+
+  type ResponseType = { data?: any[] } | any[];
 }

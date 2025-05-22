@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input, Select } from "antd";
 import { useState, useEffect } from "react";
+import { SearchOutlined } from "@ant-design/icons"; // Importar el ícono de búsqueda
 
 const { Option } = Select;
 
@@ -47,6 +48,7 @@ const SearchMerchant = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         allowClear
+        prefix={<SearchOutlined />} // Añadimos el ícono de búsqueda aquí
       />
     </div>
   );

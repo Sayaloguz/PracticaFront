@@ -17,7 +17,10 @@ export default async function ClientResults({
     : "getClientByEmail";
 
   const endPointData = query ? { endPointData: { [searchField]: query } } : {};
-  const response = await funcionUseCases(action, endPointData);
+  const response = (await funcionUseCases(
+    action,
+    endPointData
+  )) as Utility.ResponseType;
   const data = Array.isArray(response) ? response : response?.data || [];
 
   return <ClientsTable tableData={data} />;
