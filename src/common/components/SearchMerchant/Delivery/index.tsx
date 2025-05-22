@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input, Select } from "antd";
 import { useState, useEffect } from "react";
-import { SearchOutlined } from "@ant-design/icons"; // Importar el ícono de búsqueda
+import { SearchOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -11,24 +11,31 @@ const SearchMerchant = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const initialQuery = searchParams.get("query") || "";
-  const initialField =
-    (searchParams.get("field") as "name" | "clientId") || "name";
+  // Leer parámetros de la URL
+  const nameParam = searchParams.get("name");
+  const clientIdParam = searchParams.get("clientId");
+
+  const initialQuery = nameParam || clientIdParam || "";
+  const initialField = clientIdParam ? "clientId" : "name";
 
   const [query, setQuery] = useState(initialQuery);
   const [field, setField] = useState<"name" | "clientId">(initialField);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
-      const params = new URLSearchParams();
-      if (query) params.set("query", query);
-      if (field) params.set("field", field);
-
-      router.push(`/merchants?${params.toString()}`);
+      if (query) {
+        const param =
+          field === "name"
+            ? `name=${encodeURIComponent(query)}`
+            : `clientId=${encodeURIComponent(query)}`;
+        router.push(`/merchants?${param}`);
+      } else {
+        router.push("/merchants");
+      }
     }, 500);
 
     return () => clearTimeout(delayDebounce);
-  }, [query, field]);
+  }, [query, field, router]);
 
   return (
     <div className="flex gap-4 w-full">
@@ -48,7 +55,7 @@ const SearchMerchant = () => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         allowClear
-        prefix={<SearchOutlined />} // Añadimos el ícono de búsqueda aquí
+        prefix={<SearchOutlined />}
       />
     </div>
   );

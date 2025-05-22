@@ -2,13 +2,13 @@ import MerchantsTable from "@/common/components/Tables/MerchantsTable/Delivery";
 import { funcionUseCases } from "@/common/utils/functionUseCases";
 
 export default async function MerchantResults({
-  searchParams,
+  query,
   searchField,
 }: {
-  searchParams: { query?: string };
+  query: string;
   searchField: "name" | "clientId";
 }) {
-  const query = searchParams?.query?.trim().toLowerCase() || "";
+  query = query?.trim().toLowerCase() || "";
 
   let action: string;
   let endPointData: Utility.EndPointDataType = {};

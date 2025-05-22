@@ -10,9 +10,10 @@ import SearchMerchant from "@/common/components/SearchMerchant/Delivery";
 export default function MerchantsPage({
   searchParams,
 }: {
-  searchParams?: { query?: string; field?: string };
+  searchParams?: { name?: string; clientId?: string };
 }) {
-  const searchField = (searchParams?.field as "name" | "clientId") || "name";
+  const searchField = searchParams?.clientId ? "clientId" : "name";
+  const query = searchParams?.name || searchParams?.clientId || "";
 
   return (
     <section>
@@ -34,13 +35,10 @@ export default function MerchantsPage({
       </div>
 
       <Suspense
-        key={`${searchParams?.query}-${searchField}`}
+        key={`${query}-${searchField}`}
         fallback={<MerchantsTableSkeleton />}
       >
-        <MerchantResults
-          searchParams={searchParams || {}}
-          searchField={searchField}
-        />
+        <MerchantResults query={query} searchField={searchField} />
       </Suspense>
     </section>
   );
